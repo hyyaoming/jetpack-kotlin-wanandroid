@@ -1,0 +1,11 @@
+ext {
+    versions = [
+            minSdkVersion    : 21,
+            targetSdkVersion : 28,
+            compileSdkVersion: 28,
+            toolsBuildVersion: "28.0.2",
+            appVersionCode   : 1,
+            appVersionName   : "1.0.0",
+            applicationId   : "org.lym.wanandroid_kotlin"
+    ]
+}
