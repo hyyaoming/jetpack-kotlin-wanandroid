@@ -5,13 +5,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion rootProject.ext.versions.compileSdkVersion
+    compileSdkVersion rootProject.ext.androidx.compileSdkVersion
     defaultConfig {
-        applicationId rootProject.ext.versions.applicationId
-        minSdkVersion rootProject.ext.versions.minSdkVersion
-        targetSdkVersion rootProject.ext.versions.targetSdkVersion
-        versionCode rootProject.ext.versions.versionCode
-        versionName rootProject.ext.versions.versionName
+        applicationId rootProject.ext.androidx.applicationId
+        minSdkVersion rootProject.ext.androidx.minSdkVersion
+        targetSdkVersion rootProject.ext.androidx.targetSdkVersion
+        versionCode rootProject.ext.androidx.versionCode
+        versionName rootProject.ext.androidx.versionName
     }
     buildTypes {
         release {
@@ -23,6 +23,15 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation rootProject.ext.dependencies.appcompat
+    implementation rootProject.ext.dependencies.constraintlayout
+    implementation rootProject.ext.dependencies.rxJava2
+    implementation rootProject.ext.dependencies.rxAndroid
+    implementation rootProject.ext.dependencies.okHttp
+    implementation rootProject.ext.dependencies.retrofit
+    implementation rootProject.ext.dependencies.gson
+    implementation rootProject.ext.dependencies.adapter_rxjava
+    implementation rootProject.ext.dependencies.converter_gson
+
+
 }
