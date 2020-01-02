@@ -1,5 +1,7 @@
 package org.lym.wanandroid_kotlin.data.model
 
+import com.chad.library.adapter.base.entity.MultiItemEntity
+
 /**
  * 首页文章列表model
  *
@@ -36,10 +38,22 @@ data class ArticleModel(
     var publishTime: Long,
     var superChapterId: Int,
     var superChapterName: String,
+    var title: String,
     var type: Int,
     var userId: Int,
     var visible: Int,
     var zan: Int,
-    var originId: Int,
-    var tags: List<TagsModel>
-) : MultipleEntity(ARTICLE)
+    var originId: Int
+) : MultiItemEntity {
+    override val itemType: Int
+        get() = ARTICLE
+
+    fun getUser(): String {
+        if (author.isNotEmpty()) {
+            return author
+        } else if (shareUser.isNotEmpty()) {
+            return shareUser
+        }
+        return "匿名"
+    }
+}

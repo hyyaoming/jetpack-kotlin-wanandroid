@@ -5,11 +5,13 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.index_fragment.*
 import org.lym.wanandroid_kotlin.R
+import org.lym.wanandroid_kotlin.data.model.ARTICLE
 import org.lym.wanandroid_kotlin.data.repository.IndexRepository
 import org.lym.wanandroid_kotlin.mvvm.IndexViewModel
 import org.lym.wanandroid_kotlin.mvvm.ViewModelFactory
 import org.lym.wanandroid_kotlin.mvvm.adapter.ArticleAdapter
 import org.lym.wanandroid_kotlin.utils.toast
+import org.lym.wanandroid_kotlin.data.model.ArticleModel as ArticleModel1
 
 /**
  * 首页
@@ -45,10 +47,11 @@ class IndexFragment : BaseFragment() {
         rv_index.setHasFixedSize(true)
         rv_index.adapter = adapter
 
-        adapter.setOnItemClickListener { _, _, _ ->
-
+        adapter.setOnItemClickListener { adapter, _, position ->
+            if (adapter.getItemViewType(position) == ARTICLE) {
+                val item = adapter.getItem(position) as ArticleModel1
+                toast(item.chapterName)
+            }
         }
-
-
     }
 }

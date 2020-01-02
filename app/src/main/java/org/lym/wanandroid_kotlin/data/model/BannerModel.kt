@@ -1,5 +1,7 @@
 package org.lym.wanandroid_kotlin.data.model
 
+import com.chad.library.adapter.base.entity.MultiItemEntity
+
 /**
  * author: liyaoming
  * email: liyaoming@bixin.cn
@@ -13,4 +15,9 @@ data class BannerModel(
     var order: Int, var type: Int, var url: String
 )
 
-data class MultipleBannerModel(var banners: MutableList<BannerModel>?) : MultipleEntity(BANNER)
+data class MultipleBannerModel(
+    var banners: MutableList<BannerModel>?
+) : MultiItemEntity {
+    override val itemType: Int
+        get() = BANNER
+}

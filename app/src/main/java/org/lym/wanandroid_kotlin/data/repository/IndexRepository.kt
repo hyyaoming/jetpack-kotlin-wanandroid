@@ -1,6 +1,7 @@
 package org.lym.wanandroid_kotlin.data.repository
 
 import android.util.Log
+import com.chad.library.adapter.base.entity.MultiItemEntity
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -10,7 +11,6 @@ import org.lym.wanandroid_kotlin.data.RequestObserver
 import org.lym.wanandroid_kotlin.data.model.ArticleListModel
 import org.lym.wanandroid_kotlin.data.model.BannerModel
 import org.lym.wanandroid_kotlin.data.model.MultipleBannerModel
-import org.lym.wanandroid_kotlin.data.model.MultipleEntity
 import org.lym.wanandroid_kotlin.http.Api
 import org.lym.wanandroid_kotlin.http.BaseResponse
 import org.lym.wanandroid_kotlin.http.Request
@@ -45,19 +45,15 @@ class IndexRepository : Repository {
      * @param requestObserver   请求回调
      * @return  返回数据
      */
-    fun getBannerAndArticle(requestObserver: RequestObserver<MutableList<MultipleEntity>>): Disposable {
-
+    fun getBannerAndArticle(requestObserver: RequestObserver<MutableList<MultiItemEntity>>): Disposable {
         val banner = bannerObservable()
-        val articleList =
-            articleObservable(0).subscribeOn(Schedulers.io())
+        val articleList = articleObservable(0).subscribeOn(Schedulers.io())
 
-        return Observable.zip(
-            banner,
-            articleList,
+        return Observable.zip(banner, articleList,
             BiFunction<BaseResponse<MutableList<BannerModel>>,
                     BaseResponse<ArticleListModel>,
-                    MutableList<MultipleEntity>> { list: BaseResponse<MutableList<BannerModel>>, articleListModel: BaseResponse<ArticleListModel> ->
-                val result = mutableListOf<MultipleEntity>()
+                    MutableList<MultiItemEntity>> { list: BaseResponse<MutableList<BannerModel>>, articleListModel: BaseResponse<ArticleListModel> ->
+                val result = mutableListOf<MultiItemEntity>()
                 result.add(MultipleBannerModel(list.data))
                 articleListModel.data?.datas?.let { result.addAll(it) }
                 result

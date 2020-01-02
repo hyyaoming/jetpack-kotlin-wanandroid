@@ -24,10 +24,12 @@ fun isConnected(): Boolean {
     return false
 }
 
-fun toast(content: CharSequence) {
-    Toast.makeText(WanApp.getContext(), content, Toast.LENGTH_LONG).apply {
-        setGravity(Gravity.CENTER, 0, 0)
-    }.show()
+fun toast(content: CharSequence?) {
+    if (!content.isNullOrEmpty()) {
+        Toast.makeText(WanApp.getContext(), content, Toast.LENGTH_LONG).apply {
+            setGravity(Gravity.CENTER, 0, 0)
+        }.show()
+    }
 }
 
 fun Context.view(resource: Int, container: ViewGroup?, attchToRoot: Boolean): View {
