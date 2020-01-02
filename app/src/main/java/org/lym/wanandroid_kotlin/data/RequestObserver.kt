@@ -18,7 +18,7 @@ open class RequestObserver<T> : RequestCallback<T> {
     override fun onFinish() {
     }
 
-    override fun onSuccess(code: Int, data: T?) {
+    override fun onSuccess(data: T) {
     }
 
     override fun onFailed(code: Int, msg: String) {

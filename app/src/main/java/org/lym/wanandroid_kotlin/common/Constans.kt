@@ -8,3 +8,5 @@ package org.lym.wanandroid_kotlin.common
 const val BASE_URL = "https://www.wanandroid.com/"
 
 const val ERROR_CODE = 1000
+
+const val SUCCESS = 1

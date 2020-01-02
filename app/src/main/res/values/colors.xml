@@ -3,4 +3,7 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="select_menu_color">@color/colorPrimary</color>
+    <color name="un_select_color">#FF000000</color>
+
 </resources>

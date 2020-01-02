@@ -12,3 +12,5 @@ data class BannerModel(
     var isVisible: Int,
     var order: Int, var type: Int, var url: String
 )
+
+data class MultipleBannerModel(var banners: MutableList<BannerModel>?) : MultipleEntity(BANNER)

@@ -28,7 +28,13 @@ class Request<T, R : BaseResponse<T>> private constructor(observable: Observable
             if (!bean.isSuccess()) {
                 throw ApiException(bean.errorCode, bean.errorMsg)
             }
-            callback.onSuccess(bean.errorCode, bean.data)
+            if (null == bean.data) {
+                callback.onFailed(bean.errorCode, bean.errorMsg)
+            } else {
+                bean.data?.let {
+                    callback.onSuccess(it)
+                }
+            }
         }, { e ->
             if (e is ApiException) {
                 callback.onFailed(e.code, e.msg)

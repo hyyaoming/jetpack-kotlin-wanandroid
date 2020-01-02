@@ -2,7 +2,7 @@ package org.lym.wanandroid_kotlin.http.exception
 
 import com.google.gson.JsonParseException
 import org.json.JSONException
-import org.lym.wanandroid_kotlin.isConnected
+import org.lym.wanandroid_kotlin.utils.isConnected
 import retrofit2.HttpException
 import java.net.ConnectException
 import java.net.SocketTimeoutException

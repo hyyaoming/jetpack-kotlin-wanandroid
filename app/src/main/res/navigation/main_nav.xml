@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/index_fragment">
+
+    <fragment
+        android:id="@+id/index_fragment"
+        android:name="org.lym.wanandroid_kotlin.mvvm.ui.IndexFragment"
+        android:label="@string/index"
+        tools:layout="@layout/index_fragment" />
+
+    <fragment
+        android:id="@+id/category_fragment"
+        android:name="org.lym.wanandroid_kotlin.mvvm.ui.CategoryFragment"
+        android:label="@string/category"
+        tools:layout="@layout/category_fragment" />
+
+    <fragment
+        android:id="@+id/resource_fragment"
+        android:name="org.lym.wanandroid_kotlin.mvvm.ui.SourceFragment"
+        android:label="@string/resource"
+        tools:layout="@layout/source_fragment" />
+
+    <fragment
+        android:id="@+id/user_fragment"
+        android:name="org.lym.wanandroid_kotlin.mvvm.ui.UserFragment"
+        android:label="@string/user_center"
+        tools:layout="@layout/user_fragment" />
+</navigation>

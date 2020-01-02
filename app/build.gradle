@@ -40,5 +40,11 @@ dependencies {
     implementation rootProject.ext.dependencies.adapter_rxjava
     implementation rootProject.ext.dependencies.converter_gson
     implementation rootProject.ext.dependencies.archLifecycleVersion
+    implementation rootProject.ext.dependencies.navigation_fragment_ktx
+    implementation rootProject.ext.dependencies.navigation_ui_ktx
+    implementation rootProject.ext.dependencies.recyclerview_adapter
+    implementation rootProject.ext.dependencies.viewpager2
+    implementation rootProject.ext.dependencies.glide
+    annotationProcessor rootProject.ext.dependencies.glide_compiler
 
 }

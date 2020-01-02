@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/index_fragment"
+        android:icon="@drawable/index_svg_icon"
+        android:title="@string/index" />
+
+    <item
+        android:id="@+id/category_fragment"
+        android:icon="@drawable/category_svg_icon"
+        android:title="@string/category" />
+
+    <item
+        android:id="@+id/resource_fragment"
+        android:icon="@drawable/source_svg_icon"
+        android:title="@string/resource" />
+
+    <item
+        android:id="@+id/user_fragment"
+        android:icon="@drawable/user_svg_icon"
+        android:title="@string/user_center" />
+
+</menu>

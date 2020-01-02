@@ -2,24 +2,21 @@ package org.lym.wanandroid_kotlin
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import org.lym.wanandroid_kotlin.data.RequestObserver
-import org.lym.wanandroid_kotlin.data.model.BannerModel
-import org.lym.wanandroid_kotlin.data.repository.IndexRepository
-import org.lym.wanandroid_kotlin.mvvm.IndexViewModel
-import org.lym.wanandroid_kotlin.mvvm.ViewModelFactory
+import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import org.lym.wanandroid_kotlin.R
+
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val viewModel = ViewModelProviders.of(this, ViewModelFactory(IndexRepository.getInstance()))
-            .get(IndexViewModel::class.java)
-        viewModel.banners.observe(this, Observer {
-
-        })
+        val navController = Navigation.findNavController(this,
+            R.id.nav_main_host
+        )
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_menu)
+        NavigationUI.setupWithNavController(bottomNav, navController)
     }
 }
