@@ -25,6 +25,10 @@ android {
         sourceCompatibility rootProject.ext.compileOptions.sourceCompatibility
         targetCompatibility rootProject.ext.compileOptions.targetCompatibility
     }
+
+    kotlinOptions {
+        jvmTarget = rootProject.ext.jvmTarget.jvmTarget
+    }
 }
 
 dependencies {
@@ -46,5 +50,8 @@ dependencies {
     implementation rootProject.ext.dependencies.viewpager2
     implementation rootProject.ext.dependencies.glide
     annotationProcessor rootProject.ext.dependencies.glide_compiler
+    implementation rootProject.ext.dependencies.cookieJar
+    implementation "androidx.fragment:fragment-ktx:1.2.0-rc04"
+
 
 }

@@ -2,11 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rl_article"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="@dimen/dp_18">
+    android:padding="@dimen/dp_16">
 
     <TextView
         android:id="@+id/tv_new_label"
@@ -31,24 +29,52 @@
         app:layout_goneMarginStart="0dp"
         tools:text="鸿洋" />
 
-    <TextView
-        android:id="@+id/tv_nice_time"
+    <ImageView
+        android:id="@+id/iv_collect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/color_333333"
-        android:textSize="@dimen/sp_13"
+        android:src="@drawable/no_collect_svg_icon"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="一天前" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/v_collect"
+        android:layout_width="@dimen/collect_click_space"
+        android:layout_height="@dimen/collect_click_space"
+        android:background="@android:color/transparent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_article_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_6"
+        android:textColor="@color/color_333333"
         android:textSize="@dimen/sp_14"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_nice_time"
+        app:layout_constraintTop_toBottomOf="@id/iv_collect"
         tools:text="六年码农生涯的 2019 总结：君子坐而论道，少年起而行之" />
+
+    <TextView
+        android:id="@+id/tvChapterName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
+        android:textColor="@color/color_666666"
+        android:textSize="@dimen/sp_13"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_article_title"
+        tools:text="大厂分享-对外分享" />
+
+    <TextView
+        android:id="@+id/tv_nice_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_666666"
+        android:textSize="@dimen/sp_13"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvChapterName"
+        tools:text="一天前" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

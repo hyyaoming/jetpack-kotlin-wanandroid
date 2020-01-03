@@ -16,6 +16,7 @@ import org.lym.wanandroid_kotlin.utils.view
  */
 abstract class BaseFragment : Fragment() {
 
+    protected var rootView: View? = null
 
     abstract fun getLayoutResource(): Int
 
@@ -34,6 +35,9 @@ abstract class BaseFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return activity?.view(getLayoutResource(), container, false)!!
+        if (rootView == null) {
+            rootView = activity?.view(getLayoutResource(), container, false)!!
+        }
+        return rootView
     }
 }

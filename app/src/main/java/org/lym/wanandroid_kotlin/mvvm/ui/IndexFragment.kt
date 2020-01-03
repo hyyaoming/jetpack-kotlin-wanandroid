@@ -11,6 +11,7 @@ import org.lym.wanandroid_kotlin.mvvm.IndexViewModel
 import org.lym.wanandroid_kotlin.mvvm.ViewModelFactory
 import org.lym.wanandroid_kotlin.mvvm.adapter.ArticleAdapter
 import org.lym.wanandroid_kotlin.utils.toast
+import org.lym.wanandroid_kotlin.weight.LoadMore
 import org.lym.wanandroid_kotlin.data.model.ArticleModel as ArticleModel1
 
 /**
@@ -33,16 +34,30 @@ class IndexFragment : BaseFragment() {
         return R.layout.index_fragment
     }
 
-
     override fun subscribeUI() {
         indexViewModel.mutableData.observe(this, Observer {
             adapter.setNewData(it)
         })
+
+        indexViewModel.articleData.observe(this, Observer {
+            adapter.addData(it)
+            adapter.loadMoreModule?.loadMoreComplete()
+        })
+
+        indexViewModel.loadEnd.observe(this, Observer {
+            adapter.loadMoreModule?.loadMoreEnd(it)
+        })
+
+        indexViewModel.articleCollect.observe(this, Observer {
+            adapter.notifyItemChanged(it)
+        })
     }
 
     override fun initView() {
-        rv_index.layoutManager = LinearLayoutManager(activity).apply {
-            orientation = LinearLayoutManager.VERTICAL
+        rv_index.layoutManager = activity?.let {
+            LinearLayoutManager(it).apply {
+                orientation = LinearLayoutManager.VERTICAL
+            }
         }
         rv_index.setHasFixedSize(true)
         rv_index.adapter = adapter
@@ -53,5 +68,23 @@ class IndexFragment : BaseFragment() {
                 toast(item.chapterName)
             }
         }
+
+        adapter.setOnItemChildClickListener { _, view, position ->
+            if (view.id == R.id.v_collect) {
+                val articleModel = adapter.getItem(position) as ArticleModel1
+                if (articleModel.collect) {
+                    indexViewModel.unCollect(articleModel, position)
+                } else {
+                    indexViewModel.collect(articleModel, position)
+                }
+            }
+        }
+
+        adapter.loadMoreModule?.loadMoreView = LoadMore.loadMoreView
+        adapter.loadMoreModule?.preLoadNumber = 0
+        adapter.loadMoreModule?.setOnLoadMoreListener {
+            indexViewModel.loadArticle()
+        }
+
     }
 }

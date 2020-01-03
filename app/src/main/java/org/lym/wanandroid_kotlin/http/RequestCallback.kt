@@ -11,7 +11,7 @@ import org.lym.wanandroid_kotlin.http.exception.ExceptionHandle
  */
 interface RequestCallback<T> {
     fun onStart()
-    fun onSuccess(data: T)
+    fun onSuccess(data: T?)
     fun onFailed(code: Int, msg: String)
     fun onError(handle: ExceptionHandle)
     fun onFinish()

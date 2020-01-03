@@ -19,20 +19,23 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import org.lym.wanandroid_kotlin.data.repository.IndexRepository
 import org.lym.wanandroid_kotlin.data.repository.Repository
+import org.lym.wanandroid_kotlin.data.repository.UserRepository
 
 /**
  * Factory for all ViewModels.
  */
 @Suppress("UNCHECKED_CAST")
 class ViewModelFactory constructor(
-    private val tasksRepository: Repository
+    private val repository: Repository
 ) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel> create(modelClass: Class<T>) =
         with(modelClass) {
             when {
                 isAssignableFrom(IndexViewModel::class.java) ->
-                    IndexViewModel(tasksRepository as IndexRepository)
+                    IndexViewModel(repository as IndexRepository)
+                isAssignableFrom(UserViewModel::class.java) ->
+                    UserViewModel(repository as UserRepository)
                 else ->
                     throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
             }

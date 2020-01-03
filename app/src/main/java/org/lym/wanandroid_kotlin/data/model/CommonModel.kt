@@ -1,11 +1,10 @@
 package org.lym.wanandroid_kotlin.data.model
 
+import com.google.gson.Gson
+
 /**
  * author: liyaoming
  * email: liyaoming@bixin.cn
- * date: 2020-01-02-15:10
+ * date: 2020-01-03-15:00
  */
-data class TagsModel(
-    var name: String,
-    var url: String
-)
+class CommonModel()

@@ -5,25 +5,25 @@
     android:id="@+id/main_nav"
     app:startDestination="@id/index_fragment">
 
-    <fragment
+    <keep_state_fragment
         android:id="@+id/index_fragment"
         android:name="org.lym.wanandroid_kotlin.mvvm.ui.IndexFragment"
         android:label="@string/index"
         tools:layout="@layout/index_fragment" />
 
-    <fragment
+    <keep_state_fragment
         android:id="@+id/category_fragment"
         android:name="org.lym.wanandroid_kotlin.mvvm.ui.CategoryFragment"
         android:label="@string/category"
         tools:layout="@layout/category_fragment" />
 
-    <fragment
+    <keep_state_fragment
         android:id="@+id/resource_fragment"
         android:name="org.lym.wanandroid_kotlin.mvvm.ui.SourceFragment"
         android:label="@string/resource"
         tools:layout="@layout/source_fragment" />
 
-    <fragment
+    <keep_state_fragment
         android:id="@+id/user_fragment"
         android:name="org.lym.wanandroid_kotlin.mvvm.ui.UserFragment"
         android:label="@string/user_center"

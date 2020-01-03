@@ -15,7 +15,7 @@ data class ArticleListModel(
     var over: Boolean,
     var pageCount: Int,
     var size: Int,
-    var total: Int, var datas: MutableList<ArticleModel>?
+    var total: Int, var datas: MutableList<ArticleModel>
 )
 
 data class ArticleModel(

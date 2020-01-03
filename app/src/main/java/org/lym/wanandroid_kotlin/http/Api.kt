@@ -3,8 +3,9 @@ package org.lym.wanandroid_kotlin.http
 import io.reactivex.Observable
 import org.lym.wanandroid_kotlin.data.model.ArticleListModel
 import org.lym.wanandroid_kotlin.data.model.BannerModel
-import retrofit2.http.GET
-import retrofit2.http.Path
+import org.lym.wanandroid_kotlin.data.model.CommonModel
+import org.lym.wanandroid_kotlin.data.model.LoginModel
+import retrofit2.http.*
 
 /**
  * 所有接口定义类
@@ -33,8 +34,39 @@ interface Api {
     @GET("article/list/{page}/json")
     fun getArticleList(@Path("page") page: Int): Observable<BaseResponse<ArticleListModel>>
 
+    /**
+     * 登陆请求
+     *
+     * @param username
+     * @param password
+     */
+    @FormUrlEncoded
+    @POST("user/login")
+    fun login(
+        @Field("username") username: String,
+        @Field("password") password: String
+    ): Observable<BaseResponse<LoginModel>>
+
+    /**
+     * 收藏站内文章
+     *
+     * @param id    文章id
+     * @return  返回信息
+     */
+    @POST("lg/collect/{id}/json")
+    fun collect(@Path("id") id: Int): Observable<BaseResponse<CommonModel>>
+
+    /**
+     * 取消收藏
+     *
+     * @param id   文章id
+     * @return  返回信息
+     */
+    @POST("lg/uncollect_originId/{id}/json")
+    fun unCollect(@Path("id") id: Int): Observable<BaseResponse<CommonModel>>
+
 }
 
-fun <T> getApiService(clazz: Class<T>): T {
-    return HttpClient.getInstance().getService(clazz)
+fun getApiService(): Api {
+    return HttpClient.getInstance().getService(Api::class.java)
 }

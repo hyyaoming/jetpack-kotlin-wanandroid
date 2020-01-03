@@ -26,7 +26,7 @@ fun isConnected(): Boolean {
 
 fun toast(content: CharSequence?) {
     if (!content.isNullOrEmpty()) {
-        Toast.makeText(WanApp.getContext(), content, Toast.LENGTH_LONG).apply {
+        Toast.makeText(WanApp.getContext(), content, Toast.LENGTH_SHORT).apply {
             setGravity(Gravity.CENTER, 0, 0)
         }.show()
     }
@@ -36,3 +36,8 @@ fun Context.view(resource: Int, container: ViewGroup?, attchToRoot: Boolean): Vi
     return LayoutInflater.from(this).inflate(resource, container, attchToRoot)
 }
 
+
+fun dip2px(dipValue: Float): Int {
+    val scale = WanApp.getContext().resources.displayMetrics.density
+    return (dipValue * scale + 0.5F).toInt()
+}

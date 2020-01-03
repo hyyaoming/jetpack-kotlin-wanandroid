@@ -23,11 +23,16 @@ ext {
             recyclerview_adapter: "3.0.0-beta5",
             viewpager2          : "1.0.0",
             glide               : "4.10.0",
+            cookieJar           : "v1.0.1",
     ]
 
     compileOptions = [
             sourceCompatibility: JavaVersion.VERSION_1_8,
             targetCompatibility: JavaVersion.VERSION_1_8,
+    ]
+
+    jvmTarget = [
+            jvmTarget : 1.8
     ]
 
     dependencies = [
@@ -48,5 +53,6 @@ ext {
             viewpager2             : "androidx.viewpager2:viewpager2:$versions.viewpager2",
             glide                  : "com.github.bumptech.glide:glide:$versions.glide",
             glide_compiler         : "com.github.bumptech.glide:compiler:$versions.glide",
+            cookieJar              : "com.github.franmontiel:PersistentCookieJar:$versions.cookieJar",
     ]
 }

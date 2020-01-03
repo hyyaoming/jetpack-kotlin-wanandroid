@@ -5,6 +5,8 @@
     <color name="colorAccent">#D81B60</color>
     <color name="select_menu_color">@color/colorPrimary</color>
     <color name="un_select_color">#FF000000</color>
-    <color name="new_label_color">#4282f4</color>
+    <color name="new_label_color">#00ddb6</color>
     <color name="color_333333">#333333</color>
+    <color name="color_666666">#666666</color>
+    <color name="color_606060">#606060</color>
 </resources>
