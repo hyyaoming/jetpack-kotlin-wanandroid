@@ -14,7 +14,7 @@ import org.lym.wanandroid_kotlin.http.exception.ExceptionHandle
  * email: liyaoming@bixin.cn
  * date: 2019-12-31-09:59
  */
-class Request<T, R : BaseResponse<T>> private constructor(observable: Observable<R>) {
+class HttpRequest<T, R : BaseResponse<T>> private constructor(observable: Observable<R>) {
     private val mObservable: Observable<R> =
         observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
 
@@ -46,8 +46,8 @@ class Request<T, R : BaseResponse<T>> private constructor(observable: Observable
     }
 
     companion object {
-        fun <T, R : BaseResponse<T>> create(observable: Observable<R>): Request<T, R> {
-            return Request<T, R>(observable)
+        fun <T, R : BaseResponse<T>> create(observable: Observable<R>): HttpRequest<T, R> {
+            return HttpRequest<T, R>(observable)
         }
     }
 }

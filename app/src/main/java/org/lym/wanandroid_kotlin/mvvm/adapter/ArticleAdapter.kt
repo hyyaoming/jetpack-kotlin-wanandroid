@@ -71,11 +71,11 @@ class ArticleAdapter : BaseMultiItemQuickAdapter<MultiItemEntity, BaseViewHolder
         val viewPager2 = helper.itemView as ViewPager2
         viewPager2.adapter =
             object : BaseQuickAdapter<BannerModel, BaseViewHolder>(
-                R.layout.banner_item_layout,
+                R.layout.cell_banner_cell_layout,
                 bannerModel.banners
             ) {
                 override fun convert(helper: BaseViewHolder, item: BannerModel?) {
-                    ImageLoader.banner(helper.itemView as ImageView, item?.imagePath)
+                    ImageLoader.image(helper.itemView as ImageView, item?.imagePath)
                 }
             }.apply {
                 setOnItemClickListener { _, _, position ->
@@ -83,6 +83,7 @@ class ArticleAdapter : BaseMultiItemQuickAdapter<MultiItemEntity, BaseViewHolder
                     toast(model?.url)
                 }
             }
+        viewPager2.postDelayed(Runnable { }, 1000)
     }
 
 }

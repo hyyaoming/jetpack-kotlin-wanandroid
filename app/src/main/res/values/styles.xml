@@ -5,7 +5,29 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/select_menu_color</item>
+    </style>
+
+    <style name="TitleBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="ab_titleBarHeight">@dimen/dp_45</item>
+        <item name="ab_statusBarColor">@android:color/transparent</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="ab_autoImmersion">true</item>
+    </style>
+
+    <style name="TitleBar.Common">
+        <item name="abc_titleTextColor">@android:color/white</item>
+        <item name="abc_leftIconColor">@android:color/white</item>
+        <item name="abc_leftIconPadding">@dimen/dp_13</item>
+        <item name="abc_leftIconMarginLeft">@dimen/dp_3</item>
+        <item name="abc_leftTextColor">@android:color/white</item>
+        <item name="abc_rightIconColor">@android:color/white</item>
+        <item name="abc_rightIconPadding">@dimen/dp_13</item>
+        <item name="abc_rightIconMarginRight">@dimen/dp_3</item>
+        <item name="abc_rightTextColor">@android:color/white</item>
+        <item name="abc_titleTextSize">@dimen/sp_16</item>
     </style>
 
 </resources>

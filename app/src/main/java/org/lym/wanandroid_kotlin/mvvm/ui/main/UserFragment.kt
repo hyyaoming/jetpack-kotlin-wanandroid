@@ -1,12 +1,12 @@
-package org.lym.wanandroid_kotlin.mvvm.ui
+package org.lym.wanandroid_kotlin.mvvm.ui.main
 
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import kotlinx.android.synthetic.main.user_fragment.*
 import org.lym.wanandroid_kotlin.R
 import org.lym.wanandroid_kotlin.data.repository.UserRepository
-import org.lym.wanandroid_kotlin.mvvm.UserViewModel
+import org.lym.wanandroid_kotlin.mvvm.viewmodel.UserViewModel
 import org.lym.wanandroid_kotlin.mvvm.ViewModelFactory
+import org.lym.wanandroid_kotlin.mvvm.ui.BaseFragment
 import org.lym.wanandroid_kotlin.utils.toast
 
 /**
@@ -31,8 +31,6 @@ class UserFragment : BaseFragment() {
         })
     }
 
-    override fun getLayoutResource(): Int {
-        return R.layout.user_fragment
-    }
+    override fun getLayoutResource() = R.layout.fragment_user
 
 }

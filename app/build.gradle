@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
 
 android {
     compileSdkVersion rootProject.ext.androidx.compileSdkVersion
@@ -51,7 +51,10 @@ dependencies {
     implementation rootProject.ext.dependencies.glide
     annotationProcessor rootProject.ext.dependencies.glide_compiler
     implementation rootProject.ext.dependencies.cookieJar
-    implementation "androidx.fragment:fragment-ktx:1.2.0-rc04"
+    implementation rootProject.ext.dependencies.room
+    implementation rootProject.ext.dependencies.room_ktx
+    kapt rootProject.ext.dependencies.room_compiler
+    implementation rootProject.ext.dependencies.title_bar
 
 
 }

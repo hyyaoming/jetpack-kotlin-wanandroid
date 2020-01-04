@@ -24,6 +24,9 @@ ext {
             viewpager2          : "1.0.0",
             glide               : "4.10.0",
             cookieJar           : "v1.0.1",
+            room                : "2.2.3",
+            title_bar           : "3.2.4",
+
     ]
 
     compileOptions = [
@@ -32,7 +35,7 @@ ext {
     ]
 
     jvmTarget = [
-            jvmTarget : 1.8
+            jvmTarget: 1.8
     ]
 
     dependencies = [
@@ -54,5 +57,10 @@ ext {
             glide                  : "com.github.bumptech.glide:glide:$versions.glide",
             glide_compiler         : "com.github.bumptech.glide:compiler:$versions.glide",
             cookieJar              : "com.github.franmontiel:PersistentCookieJar:$versions.cookieJar",
+            room                   : "androidx.room:room-runtime:$versions.room",
+            room_ktx               : "androidx.room:room-ktx:$versions.room",
+            room_compiler          : "androidx.room:room-compiler:$versions.room",
+            title_bar              : "com.github.goweii:ActionBarEx:$versions.title_bar",
+
     ]
 }

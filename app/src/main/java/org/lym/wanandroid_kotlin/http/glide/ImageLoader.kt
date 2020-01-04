@@ -21,16 +21,4 @@ object ImageLoader {
                 .into(imageView)
         }
     }
-
-    fun banner(imageView: ImageView, url: String?) {
-        url?.let {
-            GlideHelper.with(imageView.context)
-                .errorHolder(R.drawable.image_holder)
-                .placeHolder(R.drawable.image_holder)
-                .cache(true)
-                .load(it)
-                .into(imageView)
-        }
-
-    }
 }

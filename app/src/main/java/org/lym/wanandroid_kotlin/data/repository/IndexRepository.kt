@@ -7,9 +7,8 @@ import org.lym.wanandroid_kotlin.data.RequestObserver
 import org.lym.wanandroid_kotlin.data.model.ArticleListModel
 import org.lym.wanandroid_kotlin.data.model.BannerModel
 import org.lym.wanandroid_kotlin.data.model.CommonModel
-import org.lym.wanandroid_kotlin.http.Api
 import org.lym.wanandroid_kotlin.http.BaseResponse
-import org.lym.wanandroid_kotlin.http.Request
+import org.lym.wanandroid_kotlin.http.HttpRequest
 import org.lym.wanandroid_kotlin.http.getApiService
 
 /**
@@ -43,7 +42,7 @@ class IndexRepository : Repository {
     fun getArticleListObservable(
         page: Int,
         requestObserver: RequestObserver<ArticleListModel>
-    ): Disposable = Request.create(articleObservable(page)).request(requestObserver)
+    ): Disposable = HttpRequest.create(articleObservable(page)).request(requestObserver)
 
 
     /**
@@ -54,7 +53,7 @@ class IndexRepository : Repository {
      * @return  返回Dispose
      */
     fun collect(id: Int, requestObserver: RequestObserver<CommonModel>) =
-        Request.create(getApiService().collect(id)).request(requestObserver)
+        HttpRequest.create(getApiService().collect(id)).request(requestObserver)
 
     /**
      * 取消收藏
@@ -64,7 +63,7 @@ class IndexRepository : Repository {
      * @return 返回Dispose
      */
     fun unCollect(id: Int, requestObserver: RequestObserver<CommonModel>) =
-        Request.create(getApiService().unCollect(id)).request(requestObserver)
+        HttpRequest.create(getApiService().unCollect(id)).request(requestObserver)
 
     companion object {
 

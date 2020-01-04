@@ -1,4 +1,4 @@
-package org.lym.wanandroid_kotlin.mvvm
+package org.lym.wanandroid_kotlin.mvvm.viewmodel
 
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable

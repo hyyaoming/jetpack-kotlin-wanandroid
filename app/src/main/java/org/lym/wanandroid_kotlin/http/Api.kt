@@ -1,10 +1,7 @@
 package org.lym.wanandroid_kotlin.http
 
 import io.reactivex.Observable
-import org.lym.wanandroid_kotlin.data.model.ArticleListModel
-import org.lym.wanandroid_kotlin.data.model.BannerModel
-import org.lym.wanandroid_kotlin.data.model.CommonModel
-import org.lym.wanandroid_kotlin.data.model.LoginModel
+import org.lym.wanandroid_kotlin.data.model.*
 import retrofit2.http.*
 
 /**
@@ -64,6 +61,14 @@ interface Api {
      */
     @POST("lg/uncollect_originId/{id}/json")
     fun unCollect(@Path("id") id: Int): Observable<BaseResponse<CommonModel>>
+
+    /**
+     * 获取搜索热词
+     *
+     * @return  返回热词
+     */
+    @GET("hotkey/json")
+    fun hotWork(): Observable<BaseResponse<MutableList<HotWordModel>>>
 
 }
 

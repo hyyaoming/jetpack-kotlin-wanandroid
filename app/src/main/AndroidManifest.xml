@@ -15,15 +15,16 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity android:name="org.lym.wanandroid_kotlin.MainActivity">
-
-        </activity>
-        <activity android:name="org.lym.wanandroid_kotlin.SplashActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="org.lym.wanandroid_kotlin.SplashActivity">
+
+        </activity>
+        <activity android:name="org.lym.wanandroid_kotlin.mvvm.ui.search.SearchActivity" />
     </application>
 
 </manifest>

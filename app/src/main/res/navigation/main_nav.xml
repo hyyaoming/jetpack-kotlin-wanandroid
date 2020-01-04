@@ -3,29 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/index_fragment">
+    app:startDestination="@id/index_fragment"
+    tools:ignore="UnusedNavigation">
 
     <keep_state_fragment
         android:id="@+id/index_fragment"
-        android:name="org.lym.wanandroid_kotlin.mvvm.ui.IndexFragment"
+        android:name="org.lym.wanandroid_kotlin.mvvm.ui.main.IndexFragment"
         android:label="@string/index"
-        tools:layout="@layout/index_fragment" />
+        tools:layout="@layout/fragment_index" />
 
     <keep_state_fragment
         android:id="@+id/category_fragment"
-        android:name="org.lym.wanandroid_kotlin.mvvm.ui.CategoryFragment"
+        android:name="org.lym.wanandroid_kotlin.mvvm.ui.main.CategoryFragment"
         android:label="@string/category"
-        tools:layout="@layout/category_fragment" />
+        tools:layout="@layout/fragment_category" />
 
     <keep_state_fragment
         android:id="@+id/resource_fragment"
-        android:name="org.lym.wanandroid_kotlin.mvvm.ui.SourceFragment"
+        android:name="org.lym.wanandroid_kotlin.mvvm.ui.main.SourceFragment"
         android:label="@string/resource"
-        tools:layout="@layout/source_fragment" />
+        tools:layout="@layout/fragment_source" />
 
     <keep_state_fragment
         android:id="@+id/user_fragment"
-        android:name="org.lym.wanandroid_kotlin.mvvm.ui.UserFragment"
+        android:name="org.lym.wanandroid_kotlin.mvvm.ui.main.UserFragment"
         android:label="@string/user_center"
-        tools:layout="@layout/user_fragment" />
+        tools:layout="@layout/fragment_user" />
 </navigation>

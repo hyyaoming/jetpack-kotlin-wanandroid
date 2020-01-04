@@ -19,7 +19,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import org.lym.wanandroid_kotlin.data.repository.IndexRepository
 import org.lym.wanandroid_kotlin.data.repository.Repository
+import org.lym.wanandroid_kotlin.data.repository.SearchRepository
 import org.lym.wanandroid_kotlin.data.repository.UserRepository
+import org.lym.wanandroid_kotlin.mvvm.viewmodel.HistoryViewModel
+import org.lym.wanandroid_kotlin.mvvm.viewmodel.IndexViewModel
+import org.lym.wanandroid_kotlin.mvvm.viewmodel.UserViewModel
 
 /**
  * Factory for all ViewModels.
@@ -36,6 +40,8 @@ class ViewModelFactory constructor(
                     IndexViewModel(repository as IndexRepository)
                 isAssignableFrom(UserViewModel::class.java) ->
                     UserViewModel(repository as UserRepository)
+                isAssignableFrom(HistoryViewModel::class.java) ->
+                    HistoryViewModel(repository as SearchRepository)
                 else ->
                     throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
             }

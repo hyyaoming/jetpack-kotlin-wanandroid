@@ -1,4 +1,4 @@
-package org.lym.wanandroid_kotlin.mvvm
+package org.lym.wanandroid_kotlin.mvvm.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.chad.library.adapter.base.entity.MultiItemEntity

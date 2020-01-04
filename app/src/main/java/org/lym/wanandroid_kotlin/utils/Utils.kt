@@ -7,6 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import org.lym.wanandroid_kotlin.app.WanApp
 
 /**
@@ -34,6 +37,22 @@ fun toast(content: CharSequence?) {
 
 fun Context.view(resource: Int, container: ViewGroup?, attchToRoot: Boolean): View {
     return LayoutInflater.from(this).inflate(resource, container, attchToRoot)
+}
+
+fun RecyclerView.scrollTop(targetPosition: Int) {
+    val layoutManager = layoutManager
+    var firstVisibleItemPosition = 0
+    if (layoutManager is GridLayoutManager) {
+        val manager = getLayoutManager() as GridLayoutManager
+        firstVisibleItemPosition = manager.findFirstVisibleItemPosition()
+    } else if (layoutManager is LinearLayoutManager) {
+        val manager = getLayoutManager() as LinearLayoutManager
+        firstVisibleItemPosition = manager.findFirstVisibleItemPosition()
+    }
+    if (firstVisibleItemPosition > targetPosition) {
+        scrollToPosition(targetPosition)
+    }
+    smoothScrollToPosition(0)
 }
 
 

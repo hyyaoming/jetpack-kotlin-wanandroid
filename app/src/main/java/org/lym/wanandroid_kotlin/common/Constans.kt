@@ -10,3 +10,5 @@ const val BASE_URL = "https://www.wanandroid.com/"
 const val ERROR_CODE = 1000
 
 const val SUCCESS = 1
+
+const val DATABASE_NAME = "wanandroid.db"
