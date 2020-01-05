@@ -33,14 +33,14 @@ class MainActivity : AppCompatActivity() {
 
 
         bottom_menu.setOnNavigationItemReselectedListener {
-            val currentTimeMillis = System.currentTimeMillis();
+            val currentTimeMillis = System.currentTimeMillis()
             if (currentTimeMillis - lastClickTime < 600) {
                 val fragment =
                     navHostFragment.childFragmentManager.primaryNavigationFragment
                 val baseFragment = fragment as BaseFragment
                 baseFragment.scrollToTop()
             }
-            lastClickTime = currentTimeMillis;
+            lastClickTime = currentTimeMillis
         }
     }
 }

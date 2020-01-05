@@ -1,10 +1,20 @@
 package org.lym.wanandroid_kotlin.mvvm.ui.search
 
 import android.os.Bundle
+import android.view.KeyEvent
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.plusAssign
+import kotlinx.android.synthetic.main.activity_search.*
 import org.lym.wanandroid_kotlin.R
+import org.lym.wanandroid_kotlin.data.db.AppDataBase
+import org.lym.wanandroid_kotlin.data.db.model.KeyWord
+import org.lym.wanandroid_kotlin.data.repository.IndexRepository
+import org.lym.wanandroid_kotlin.data.repository.SearchRepository
+import org.lym.wanandroid_kotlin.utils.toast
 import org.lym.wanandroid_kotlin.weight.KeepStateNavigator
 
 /**

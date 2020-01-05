@@ -32,6 +32,14 @@ interface Api {
     fun getArticleList(@Path("page") page: Int): Observable<BaseResponse<ArticleListModel>>
 
     /**
+     *  置顶文章
+     *
+     * @return  返回数据
+     */
+    @GET("article/top/json")
+    fun getTopArticleList(): Observable<BaseResponse<List<ArticleModel>>>
+
+    /**
      * 登陆请求
      *
      * @param username

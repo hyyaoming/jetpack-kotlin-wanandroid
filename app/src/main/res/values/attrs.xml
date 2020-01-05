@@ -5,4 +5,12 @@
         <attr name="android:color" />
         <attr name="auto_animation" format="boolean" />
     </declare-styleable>
+
+    <declare-styleable name="FloatLayout">
+        <attr name="android:gravity"/>
+        <attr name="childHorizontalSpacing" format="dimension"/>
+        <attr name="childVerticalSpacing" format="dimension"/>
+        <attr name="android:maxLines"/>
+        <attr name="maxNumber" format="integer"/>
+    </declare-styleable>
 </resources>

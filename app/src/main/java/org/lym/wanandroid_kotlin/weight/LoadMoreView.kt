@@ -15,7 +15,7 @@ import org.lym.wanandroid_kotlin.R
 class LoadMoreView : BaseLoadMoreView() {
 
     override fun getRootView(parent: ViewGroup): View =
-        parent.getItemView(R.layout.load_more_view)
+        parent.getItemView(R.layout.view_load_more)
 
     override fun getLoadingView(holder: BaseViewHolder): View =
         holder.getView(R.id.load_more_loading_view)

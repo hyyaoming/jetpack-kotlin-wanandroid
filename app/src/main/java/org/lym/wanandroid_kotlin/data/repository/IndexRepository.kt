@@ -42,7 +42,7 @@ class IndexRepository : Repository {
     fun getArticleListObservable(
         page: Int,
         requestObserver: RequestObserver<ArticleListModel>
-    ): Disposable = HttpRequest.create(articleObservable(page)).request(requestObserver)
+    ) = HttpRequest.create(articleObservable(page)).request(requestObserver)
 
 
     /**
