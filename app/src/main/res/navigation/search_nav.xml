@@ -6,13 +6,13 @@
     app:startDestination="@+id/history_fragment"
     tools:ignore="UnusedNavigation">
 
-    <keep_state_fragment
+    <fragment
         android:id="@+id/search_result_fragment"
         android:name="org.lym.wanandroid_kotlin.mvvm.ui.search.SearchResultFragment"
         android:label="search_result_fragment"
         tools:layout="@layout/fragment_search_result" />
 
-    <keep_state_fragment
+    <fragment
         android:id="@+id/history_fragment"
         android:name="org.lym.wanandroid_kotlin.mvvm.ui.search.HistoryFragment"
         android:label="history_fragment"
@@ -20,8 +20,16 @@
 
         <action
             android:id="@+id/action_search_result_fragment"
-            app:destination="@id/search_result_fragment" />
+            app:destination="@id/search_result_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
 
-    </keep_state_fragment>
+        <argument
+            android:name="search_key"
+            app:argType="string" />
+
+    </fragment>
 
 </navigation>

@@ -14,8 +14,12 @@ import org.lym.wanandroid_kotlin.data.repository.SearchRepository
  * date: 2020-01-04-18:00
  */
 class HistoryViewModel(val searchRepository: SearchRepository) : AutoDisposeViewModel() {
+    fun clearHistory() {
+
+    }
+
     val hotWords = MutableLiveData<List<HotWordModel>>()
-    val topArticle = MutableLiveData<List<ArticleModel>>()
+    val topArticle = MutableLiveData<MutableList<ArticleModel>>()
 
     init {
         addDispose(searchRepository.getHotWork(object :
@@ -27,8 +31,8 @@ class HistoryViewModel(val searchRepository: SearchRepository) : AutoDisposeView
         }))
 
         addDispose(searchRepository.getTopArticleList(object :
-            RequestObserver<List<ArticleModel>>() {
-            override fun onSuccess(data: List<ArticleModel>?) {
+            RequestObserver<MutableList<ArticleModel>>() {
+            override fun onSuccess(data: MutableList<ArticleModel>?) {
                 super.onSuccess(data)
                 topArticle.value = data
             }

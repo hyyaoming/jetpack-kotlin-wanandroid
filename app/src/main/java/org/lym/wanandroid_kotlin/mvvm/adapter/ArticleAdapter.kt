@@ -83,7 +83,6 @@ class ArticleAdapter : BaseMultiItemQuickAdapter<MultiItemEntity, BaseViewHolder
                     toast(model?.url)
                 }
             }
-        viewPager2.postDelayed(Runnable { }, 1000)
     }
 
 }

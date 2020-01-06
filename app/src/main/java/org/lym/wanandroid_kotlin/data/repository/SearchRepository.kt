@@ -5,8 +5,6 @@ import io.reactivex.schedulers.Schedulers
 import org.lym.wanandroid_kotlin.data.RequestObserver
 import org.lym.wanandroid_kotlin.data.db.KeyWordDao
 import org.lym.wanandroid_kotlin.data.db.model.KeyWord
-import org.lym.wanandroid_kotlin.data.model.ArticleListModel
-import org.lym.wanandroid_kotlin.data.model.ArticleModel
 import org.lym.wanandroid_kotlin.data.model.HotWordModel
 import org.lym.wanandroid_kotlin.http.HttpRequest
 import org.lym.wanandroid_kotlin.http.getApiService
@@ -18,7 +16,7 @@ import org.lym.wanandroid_kotlin.http.getApiService
  * email: liyaoming@bixin.cn
  * date: 2020-01-04-18:01
  */
-class SearchRepository private constructor(private val wordDao: KeyWordDao) : Repository {
+class SearchRepository private constructor(private val wordDao: KeyWordDao) : ArticleRepository() {
 
     /**
      * 获取搜索热词
@@ -26,13 +24,6 @@ class SearchRepository private constructor(private val wordDao: KeyWordDao) : Re
      */
     fun getHotWork(requestObserver: RequestObserver<MutableList<HotWordModel>>) =
         HttpRequest.create(getApiService().hotWork()).request(requestObserver)
-
-    /**
-     * 获取置顶文章
-     * @param requestObserver   请求回调
-     */
-    fun getTopArticleList(requestObserver: RequestObserver<List<ArticleModel>>) =
-        HttpRequest.create(getApiService().getTopArticleList()).request(requestObserver)
 
     /**
      * 获取历史搜索记录

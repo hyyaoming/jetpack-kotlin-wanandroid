@@ -12,6 +12,6 @@ import androidx.room.PrimaryKey
  */
 @Entity(tableName = "words")
 data class KeyWord(
-    @PrimaryKey
+    @PrimaryKey()
     val wordName: String
 )

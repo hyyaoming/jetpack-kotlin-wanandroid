@@ -16,7 +16,7 @@
         app:abs_rightTextColor="@android:color/white"
         app:abs_rightTextPaddingRight="16dp"
         app:abs_titleBgRes="@drawable/search_bg"
-        app:abs_titleHintColor="@android:color/white"
+        app:abs_titleHintColor="@color/color_EEE9E9"
         app:abs_titleHintText="@string/hint_search"
         app:abs_titleMarginVertical="@dimen/dp_6"
         app:abs_titlePaddingHorizontal="@dimen/dp_15"
@@ -29,6 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        app:defaultNavHost="true" />
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/search_nav" />
 
 </LinearLayout>

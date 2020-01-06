@@ -7,7 +7,6 @@ import androidx.navigation.plusAssign
 import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.activity_main.*
 import org.lym.wanandroid_kotlin.mvvm.ui.BaseFragment
-import org.lym.wanandroid_kotlin.utils.toast
 import org.lym.wanandroid_kotlin.weight.KeepStateNavigator
 
 

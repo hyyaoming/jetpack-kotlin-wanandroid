@@ -23,7 +23,6 @@ class IndexViewModel(var indexRepository: IndexRepository) : AutoDisposeViewMode
     val mutableData = MutableLiveData<MutableList<MultiItemEntity>>()
     val articleData = MutableLiveData<MutableList<ArticleModel>>()
     val articleCollect = MutableLiveData<Int>()
-    val loadEnd = MutableLiveData<Boolean>()
     private var page = 0
 
     init {

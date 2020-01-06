@@ -23,6 +23,7 @@ import org.lym.wanandroid_kotlin.data.repository.SearchRepository
 import org.lym.wanandroid_kotlin.data.repository.UserRepository
 import org.lym.wanandroid_kotlin.mvvm.viewmodel.HistoryViewModel
 import org.lym.wanandroid_kotlin.mvvm.viewmodel.IndexViewModel
+import org.lym.wanandroid_kotlin.mvvm.viewmodel.SearchResultViewModel
 import org.lym.wanandroid_kotlin.mvvm.viewmodel.UserViewModel
 
 /**
@@ -42,6 +43,8 @@ class ViewModelFactory constructor(
                     UserViewModel(repository as UserRepository)
                 isAssignableFrom(HistoryViewModel::class.java) ->
                     HistoryViewModel(repository as SearchRepository)
+                isAssignableFrom(SearchResultViewModel::class.java) ->
+                    SearchResultViewModel(repository as SearchRepository)
                 else ->
                     throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
             }

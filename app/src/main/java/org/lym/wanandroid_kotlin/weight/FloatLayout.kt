@@ -9,14 +9,11 @@ import android.view.ViewGroup
 import org.lym.wanandroid_kotlin.R
 
 /**
- * 该 layout 使子 View 类似 CSS 中的 float:left 效果, 从左到右排列子 View 并自动换行。支持以下特性：
+ * 功能类似于TagFlowLayout,但是这个支持设置显示最多行数，最多个数，对于子View点击事件支持不太友好。
  *
- *  * 使用 [.setChildVerticalSpacing] 和 [.setChildHorizontalSpacing] 控制子 View 的垂直/水平间距
- *  * 使用 [.setGravity] 控制子 View 的对齐方向 (左对齐/居中/右对齐)
- *  * 使用 [.setMaxNumber] 和 [.setMaxLines] 控制子 View 的最多个数或最大行数
- *
- *
- * 在 xml 中采用 [R.styleable.FloatLayout] 控制以上属性。
+ * @author: ym.li
+ * @since: 2018/8/7/007
+ * @version: 2.1.0
  */
 class FloatLayout @JvmOverloads constructor(
     context: Context,
@@ -31,19 +28,15 @@ class FloatLayout @JvmOverloads constructor(
     private var mGravity: Int = 0
     private var mMaxMode = LINES
     private var mMaximum = Integer.MAX_VALUE
-    var lineCount = 0
-        private set
+    private var lineCount = 0
     private var mOnLineCountChangeListener: OnLineCountChangeListener? = null
-
     /**
      *
      * 每一行的item数目，下标表示行下标，在onMeasured的时候计算得出，供onLayout去使用。
      *
      * 若mItemNumberInEachLine[x]==0，则表示第x行已经没有item了
      */
-    private val mItemNumberInEachLine: IntArray by lazy {
-        IntArray(childCount)
-    }
+    private lateinit var mItemNumberInEachLine: IntArray
     /**
      *
      * 每一行的item的宽度和（包括item直接的间距），下标表示行下标，
@@ -51,9 +44,7 @@ class FloatLayout @JvmOverloads constructor(
      *
      * 在onMeasured的时候计算得出，供onLayout去使用
      */
-    private val mWidthSumInEachLine: IntArray by lazy {
-        IntArray(childCount)
-    }
+    private lateinit var mWidthSumInEachLine: IntArray
     /**
      * onMeasure过程中实际参与measure的子View个数
      */
@@ -108,11 +99,6 @@ class FloatLayout @JvmOverloads constructor(
         }
 
     init {
-        init(context, attrs)
-    }
-
-    @SuppressLint("RtlHardcoded")
-    private fun init(context: Context, attrs: AttributeSet?) {
         val array = context.obtainStyledAttributes(
             attrs,
             R.styleable.FloatLayout
@@ -123,33 +109,38 @@ class FloatLayout @JvmOverloads constructor(
         mChildVerticalSpacing = array.getDimensionPixelSize(
             R.styleable.FloatLayout_childVerticalSpacing, 0
         )
-        mGravity = array.getInteger(R.styleable.FloatLayout_android_gravity, Gravity.LEFT)
-        val maxLine = array.getInt(R.styleable.FloatLayout_android_maxLines, -1)
-        if (maxLine >= 0) {
-            maxLines = maxLine
+        mGravity = array.getInteger(R.styleable.FloatLayout_android_gravity, Gravity.START)
+        val lines = array.getInt(R.styleable.FloatLayout_android_maxLines, -1)
+        if (lines >= 0) {
+            maxLines = lines
         }
-        val maxNumbers = array.getInt(R.styleable.FloatLayout_maxNumber, -1)
-        if (maxNumbers >= 0) {
-            maxNumber = maxNumbers
+        val number = array.getInt(R.styleable.FloatLayout_maxNumber, -1)
+        if (number >= 0) {
+            maxNumber = number
         }
         array.recycle()
     }
 
     @SuppressLint("DrawAllocation")
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        val widthSpecMode = MeasureSpec.getMode(widthMeasureSpec)
-        val widthSpecSize = MeasureSpec.getSize(widthMeasureSpec)
-        val heightSpecMode = MeasureSpec.getMode(heightMeasureSpec)
-        val heightSpecSize = MeasureSpec.getSize(heightMeasureSpec)
+        val widthSpecMode = View.MeasureSpec.getMode(widthMeasureSpec)
+        val widthSpecSize = View.MeasureSpec.getSize(widthMeasureSpec)
+        val heightSpecMode = View.MeasureSpec.getMode(heightMeasureSpec)
+        val heightSpecSize = View.MeasureSpec.getSize(heightMeasureSpec)
 
         var maxLineHeight = 0
 
         var resultWidth: Int
         var resultHeight: Int
+
+        val count = childCount
+
+        mItemNumberInEachLine = IntArray(count)
+        mWidthSumInEachLine = IntArray(count)
         var lineIndex = 0
 
         // 若FloatLayout指定了MATCH_PARENT或固定宽度，则需要使子View换行
-        if (widthSpecMode == MeasureSpec.EXACTLY) {
+        if (widthSpecMode == View.MeasureSpec.EXACTLY) {
             resultWidth = widthSpecSize
 
             measuredChildCount = 0
@@ -161,7 +152,7 @@ class FloatLayout @JvmOverloads constructor(
             // 子View的Right最大可达到的x坐标
             val childMaxRight = widthSpecSize - paddingRight
 
-            for (i in 0 until childCount) {
+            for (i in 0 until count) {
                 if (mMaxMode == NUMBER && measuredChildCount >= mMaximum) {
                     // 超出最多数量，则不再继续
                     break
@@ -176,11 +167,11 @@ class FloatLayout @JvmOverloads constructor(
                 }
 
                 val childLayoutParams = child.layoutParams
-                val childWidthMeasureSpec = getChildMeasureSpec(
+                val childWidthMeasureSpec = ViewGroup.getChildMeasureSpec(
                     widthMeasureSpec,
                     paddingLeft + paddingRight, childLayoutParams.width
                 )
-                val childHeightMeasureSpec = getChildMeasureSpec(
+                val childHeightMeasureSpec = ViewGroup.getChildMeasureSpec(
                     heightMeasureSpec,
                     paddingTop + paddingBottom, childLayoutParams.height
                 )
@@ -201,30 +192,32 @@ class FloatLayout @JvmOverloads constructor(
                     childPositionX = paddingLeft // 下一行第一个item的x
                     childPositionY += maxLineHeight + mChildVerticalSpacing // 下一行第一个item的y
                 }
+                if (lineIndex >= mItemNumberInEachLine.size) {
+                    lineIndex = mItemNumberInEachLine.size - 1
+                }
                 mItemNumberInEachLine[lineIndex]++
                 mWidthSumInEachLine[lineIndex] += childw + mChildHorizontalSpacing
                 childPositionX += childw + mChildHorizontalSpacing
                 measuredChildCount++
             }
             // 如果最后一个item不是刚好在行末（即lineCount最后没有+1，也就是mWidthSumInEachLine[lineCount]非0），则要减去最后一个item的space
-            if (mWidthSumInEachLine.isNotEmpty() && mWidthSumInEachLine[lineIndex] > 0) {
+            if (mWidthSumInEachLine.size > 0 && mWidthSumInEachLine[lineIndex] > 0) {
                 mWidthSumInEachLine[lineIndex] -= mChildHorizontalSpacing
             }
-            if (heightSpecMode == MeasureSpec.UNSPECIFIED) {
+            if (heightSpecMode == View.MeasureSpec.UNSPECIFIED) {
                 resultHeight = childPositionY + maxLineHeight + paddingBottom
-            } else if (heightSpecMode == MeasureSpec.AT_MOST) {
+            } else if (heightSpecMode == View.MeasureSpec.AT_MOST) {
                 resultHeight = childPositionY + maxLineHeight + paddingBottom
                 resultHeight = Math.min(resultHeight, heightSpecSize)
             } else {
                 resultHeight = heightSpecSize
             }
-
         } else {
             // 不计算换行，直接一行铺开
             resultWidth = paddingLeft + paddingRight
             measuredChildCount = 0
 
-            for (i in 0 until childCount) {
+            for (i in 0 until count) {
                 if (mMaxMode == NUMBER) {
                     // 超出最多数量，则不再继续
                     if (measuredChildCount > mMaximum) {
@@ -241,11 +234,11 @@ class FloatLayout @JvmOverloads constructor(
                     continue
                 }
                 val childLayoutParams = child.layoutParams
-                val childWidthMeasureSpec = getChildMeasureSpec(
+                val childWidthMeasureSpec = ViewGroup.getChildMeasureSpec(
                     widthMeasureSpec,
                     paddingLeft + paddingRight, childLayoutParams.width
                 )
-                val childHeightMeasureSpec = getChildMeasureSpec(
+                val childHeightMeasureSpec = ViewGroup.getChildMeasureSpec(
                     heightMeasureSpec,
                     paddingTop + paddingBottom, childLayoutParams.height
                 )
@@ -259,7 +252,7 @@ class FloatLayout @JvmOverloads constructor(
             }
             resultHeight = maxLineHeight + paddingTop + paddingBottom
             if (mItemNumberInEachLine.isNotEmpty()) {
-                mItemNumberInEachLine[lineIndex] = childCount
+                mItemNumberInEachLine[lineIndex] = count
             }
             if (mWidthSumInEachLine.isNotEmpty()) {
                 mWidthSumInEachLine[0] = resultWidth
@@ -268,87 +261,19 @@ class FloatLayout @JvmOverloads constructor(
         setMeasuredDimension(resultWidth, resultHeight)
         val meausureLineCount = lineIndex + 1
         if (lineCount != meausureLineCount) {
-            if (mOnLineCountChangeListener != null) {
-                mOnLineCountChangeListener!!.onChange(lineCount, meausureLineCount)
-            }
+            mOnLineCountChangeListener?.onChange(lineCount, measuredChildCount)
             lineCount = meausureLineCount
         }
     }
 
-    @SuppressLint("RtlHardcoded")
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         val width = right - left
         // 按照不同gravity使用不同的布局，默认是left
         when (mGravity and Gravity.HORIZONTAL_GRAVITY_MASK) {
-            Gravity.LEFT -> layoutWithGravityLeft(width)
-            Gravity.RIGHT -> layoutWithGravityRight(width)
+            Gravity.START -> layoutWithGravityLeft(width)
+            Gravity.END -> layoutWithGravityRight(width)
             Gravity.CENTER_HORIZONTAL -> layoutWithGravityCenterHorizontal(width)
             else -> layoutWithGravityLeft(width)
-        }
-    }
-
-    /**
-     * 将子View居中布局
-     */
-    private fun layoutWithGravityCenterHorizontal(parentWidth: Int) {
-        var nextChildIndex = 0
-        var nextChildPositionX: Int
-        var nextChildPositionY = paddingTop
-        var lineHeight = 0
-        var layoutChildCount = 0
-        var layoutChildEachLine = 0
-
-        // 遍历每一行
-        for (i in mItemNumberInEachLine.indices) {
-            // 如果这一行已经没item了，则退出循环
-            if (mItemNumberInEachLine[i] == 0) {
-                break
-            }
-
-            // 遍历该行内的元素，布局每个元素
-            nextChildPositionX =
-                (parentWidth - paddingLeft - paddingRight - mWidthSumInEachLine[i]) / 2 + paddingLeft // 子 View 的最小 x 值
-            while (layoutChildEachLine < mItemNumberInEachLine[i]) {
-                val childView = getChildAt(nextChildIndex)
-                if (childView.visibility == View.GONE) {
-                    nextChildIndex++
-                    continue
-                }
-                val childw = childView.measuredWidth
-                val childh = childView.measuredHeight
-                childView.layout(
-                    nextChildPositionX,
-                    nextChildPositionY,
-                    nextChildPositionX + childw,
-                    nextChildPositionY + childh
-                )
-                lineHeight = Math.max(lineHeight, childh)
-                nextChildPositionX += childw + mChildHorizontalSpacing
-                layoutChildCount++
-                layoutChildEachLine++
-                nextChildIndex++
-                if (layoutChildCount == measuredChildCount) {
-                    break
-                }
-            }
-
-            if (layoutChildCount == measuredChildCount) {
-                break
-            }
-
-            // 一行结束了，整理一下，准备下一行
-            nextChildPositionY += lineHeight + mChildVerticalSpacing
-            lineHeight = 0
-            layoutChildEachLine = 0
-        }
-
-        val childCount = childCount
-        for (i in nextChildIndex until childCount) {
-            val childView = getChildAt(i)
-            if (childView.visibility == View.GONE) {
-                continue
-            }
-            childView.layout(0, 0, 0, 0)
         }
     }
 
@@ -361,31 +286,37 @@ class FloatLayout @JvmOverloads constructor(
         var childPositionY = paddingTop
         var lineHeight = 0
         val childCount = childCount
-        var layoutChildCount = 0
-        for (i in 0 until childCount) {
+        val childCountToLayout = Math.min(childCount, measuredChildCount)
+        for (i in 0 until childCountToLayout) {
             val child = getChildAt(i)
             if (child.visibility == View.GONE) {
                 continue
             }
-            if (layoutChildCount < measuredChildCount) {
-                val childw = child.measuredWidth
-                val childh = child.measuredHeight
-                if (childPositionX + childw > childMaxRight) {
-                    // 换行
-                    childPositionX = paddingLeft
-                    childPositionY += lineHeight + mChildVerticalSpacing
-                    lineHeight = 0
+            val childw = child.measuredWidth
+            val childh = child.measuredHeight
+            if (childPositionX + childw > childMaxRight) {
+                // 换行
+                childPositionX = paddingLeft
+                childPositionY += lineHeight + mChildVerticalSpacing
+                lineHeight = 0
+            }
+            child.layout(
+                childPositionX,
+                childPositionY,
+                childPositionX + childw,
+                childPositionY + childh
+            )
+            childPositionX += childw + mChildHorizontalSpacing
+            lineHeight = Math.max(lineHeight, childh)
+        }
+
+        // 如果布局的子View少于childCount，则表示有一些子View不需要布局
+        if (measuredChildCount < childCount) {
+            for (i in measuredChildCount until childCount) {
+                val child = getChildAt(i)
+                if (child.visibility == View.GONE) {
+                    continue
                 }
-                child.layout(
-                    childPositionX,
-                    childPositionY,
-                    childPositionX + childw,
-                    childPositionY + childh
-                )
-                childPositionX += childw + mChildHorizontalSpacing
-                lineHeight = Math.max(lineHeight, childh)
-                layoutChildCount++
-            } else {
                 child.layout(0, 0, 0, 0)
             }
         }
@@ -399,8 +330,6 @@ class FloatLayout @JvmOverloads constructor(
         var nextChildPositionX: Int
         var nextChildPositionY = paddingTop
         var lineHeight = 0
-        var layoutChildCount = 0
-        var layoutChildEachLine = 0
 
         // 遍历每一行
         for (i in mItemNumberInEachLine.indices) {
@@ -409,13 +338,16 @@ class FloatLayout @JvmOverloads constructor(
                 break
             }
 
+            if (nextChildIndex > measuredChildCount - 1) {
+                break
+            }
+
             // 遍历该行内的元素，布局每个元素
             nextChildPositionX =
                 parentWidth - paddingRight - mWidthSumInEachLine[i] // 初始值为子 View 的最小 x 值
-            while (layoutChildEachLine < mItemNumberInEachLine[i]) {
-                val childView = getChildAt(nextChildIndex)
+            for (j in nextChildIndex until nextChildIndex + mItemNumberInEachLine[i]) {
+                val childView = getChildAt(j)
                 if (childView.visibility == View.GONE) {
-                    nextChildIndex++
                     continue
                 }
                 val childw = childView.measuredWidth
@@ -428,30 +360,80 @@ class FloatLayout @JvmOverloads constructor(
                 )
                 lineHeight = Math.max(lineHeight, childh)
                 nextChildPositionX += childw + mChildHorizontalSpacing
-                layoutChildCount++
-                layoutChildEachLine++
-                nextChildIndex++
-                if (layoutChildCount == measuredChildCount) {
-                    break
-                }
-            }
-            if (layoutChildCount == measuredChildCount) {
-                break
             }
 
             // 一行结束了，整理一下，准备下一行
             nextChildPositionY += lineHeight + mChildVerticalSpacing
+            nextChildIndex += mItemNumberInEachLine[i]
             lineHeight = 0
-            layoutChildEachLine = 0
         }
 
         val childCount = childCount
-        for (i in nextChildIndex until childCount) {
-            val childView = getChildAt(i)
-            if (childView.visibility == View.GONE) {
-                continue
+        if (measuredChildCount < childCount) {
+            for (i in measuredChildCount until childCount) {
+                val childView = getChildAt(i)
+                if (childView.visibility == View.GONE) {
+                    continue
+                }
+                childView.layout(0, 0, 0, 0)
             }
-            childView.layout(0, 0, 0, 0)
+        }
+    }
+
+    /**
+     * 将子View居中布局
+     */
+    private fun layoutWithGravityCenterHorizontal(parentWidth: Int) {
+        var nextChildIndex = 0
+        var nextChildPositionX: Int
+        var nextChildPositionY = paddingTop
+        var lineHeight = 0
+        // 遍历每一行
+        for (i in mItemNumberInEachLine.indices) {
+            // 如果这一行已经没item了，则退出循环
+            if (mItemNumberInEachLine[i] == 0) {
+                break
+            }
+
+            if (nextChildIndex > measuredChildCount - 1) {
+                break
+            }
+
+            // 遍历该行内的元素，布局每个元素
+            nextChildPositionX =
+                (parentWidth - paddingLeft - paddingRight - mWidthSumInEachLine[i]) / 2 + paddingLeft // 子 View 的最小 x 值
+            for (j in nextChildIndex until nextChildIndex + mItemNumberInEachLine[i]) {
+                val childView = getChildAt(j)
+                if (childView.visibility == View.GONE) {
+                    continue
+                }
+                val childw = childView.measuredWidth
+                val childh = childView.measuredHeight
+                childView.layout(
+                    nextChildPositionX,
+                    nextChildPositionY,
+                    nextChildPositionX + childw,
+                    nextChildPositionY + childh
+                )
+                lineHeight = Math.max(lineHeight, childh)
+                nextChildPositionX += childw + mChildHorizontalSpacing
+            }
+
+            // 一行结束了，整理一下，准备下一行
+            nextChildPositionY += lineHeight + mChildVerticalSpacing
+            nextChildIndex += mItemNumberInEachLine[i]
+            lineHeight = 0
+        }
+
+        val childCount = childCount
+        if (measuredChildCount < childCount) {
+            for (i in measuredChildCount until childCount) {
+                val childView = getChildAt(i)
+                if (childView.visibility == View.GONE) {
+                    continue
+                }
+                childView.layout(0, 0, 0, 0)
+            }
         }
     }
 
@@ -480,7 +462,6 @@ class FloatLayout @JvmOverloads constructor(
     }
 
     companion object {
-
         private const val LINES = 0
         private const val NUMBER = 1
     }

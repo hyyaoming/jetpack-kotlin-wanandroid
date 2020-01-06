@@ -60,11 +60,7 @@ class IndexFragment : BaseFragment() {
     }
 
     override fun initView() {
-        rv_index.layoutManager = activity?.let {
-            LinearLayoutManager(it).apply {
-                orientation = LinearLayoutManager.VERTICAL
-            }
-        }
+        rv_index.layoutManager = LinearLayoutManager(requireContext())
         rv_index.setHasFixedSize(true)
         rv_index.adapter = adapter
 

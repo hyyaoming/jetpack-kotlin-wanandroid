@@ -37,7 +37,7 @@ interface Api {
      * @return  返回数据
      */
     @GET("article/top/json")
-    fun getTopArticleList(): Observable<BaseResponse<List<ArticleModel>>>
+    fun getTopArticleList(): Observable<BaseResponse<MutableList<ArticleModel>>>
 
     /**
      * 登陆请求
@@ -77,6 +77,15 @@ interface Api {
      */
     @GET("hotkey/json")
     fun hotWork(): Observable<BaseResponse<MutableList<HotWordModel>>>
+
+    /**
+     *  搜索文章
+     *
+     * @return  返回数据
+     */
+    @FormUrlEncoded
+    @POST("article/query/{page}/json")
+    fun searchArticle(@Path("page") page: Int, @Field("k") key: String): Observable<BaseResponse<ArticleListModel>>
 
 }
 

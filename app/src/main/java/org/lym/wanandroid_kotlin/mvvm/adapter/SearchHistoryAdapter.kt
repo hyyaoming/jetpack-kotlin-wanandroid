@@ -21,7 +21,7 @@ class SearchHistoryAdapter :
     BaseQuickAdapter<ArticleModel, BaseViewHolder>(R.layout.cell_hot_article_lyaout) {
     override fun convert(helper: BaseViewHolder, item: ArticleModel?) {
         item?.let {
-            helper.setText(R.id.tv_article_top, "Top${helper.adapterPosition + 1}")
+            helper.setText(R.id.tv_article_top, "Top${helper.adapterPosition}")
             helper.setText(R.id.tv_article_author, it.getUser())
             helper.setText(R.id.tv_article_title, it.title)
             helper.setText(R.id.tv_article_desc, Html.fromHtml(it.desc))

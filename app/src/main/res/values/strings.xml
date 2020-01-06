@@ -9,4 +9,7 @@
     <string name="search">搜索</string>
     <string name="hint_search">用空格隔开多个关键词</string>
     <string name="hot_search_word">搜索热词</string>
+    <string name="history_search">历史搜索</string>
+    <string name="top_article">置顶文章</string>
+    <string name="please_input_search_key">请输入搜索关键字哦～</string>
 </resources>

@@ -9,7 +9,7 @@
     android:layout_marginRight="@dimen/dp_12"
     android:layout_marginBottom="@dimen/dp_6"
     app:cardBackgroundColor="@android:color/white"
-    app:cardCornerRadius="@dimen/dp_8"
+    app:cardCornerRadius="@dimen/dp_6"
     app:cardElevation="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,31 +18,18 @@
         android:padding="@dimen/dp_12">
 
         <TextView
-            android:id="@+id/tv_article_top"
+            android:id="@+id/tv_result_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/dp_6"
-            android:text="@string/new_label"
-            android:textColor="@color/color_FF3030"
-            android:textSize="@dimen/sp_13"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_article_author"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_8"
             android:textColor="@color/color_333333"
             android:textSize="@dimen/sp_13"
-            app:layout_constraintLeft_toRightOf="@id/tv_article_top"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_goneMarginStart="0dp"
             tools:text="鸿洋" />
 
         <TextView
-            android:id="@+id/tv_article_nice_time"
+            android:id="@+id/tv_result_nice_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/color_666666"
@@ -52,36 +39,45 @@
             tools:text="一天前" />
 
         <TextView
-            android:id="@+id/tv_article_title"
+            android:id="@+id/tv_result_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_6"
             android:textColor="@color/color_333333"
             android:textSize="@dimen/sp_14"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_article_author"
+            app:layout_constraintTop_toBottomOf="@id/tv_result_author"
             tools:text="六年码农生涯的 2019 总结：君子坐而论道，少年起而行之" />
 
         <TextView
-            android:id="@+id/tv_article_desc"
+            android:id="@+id/tv_result_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_6"
             android:textColor="@color/color_666666"
             android:textSize="@dimen/sp_13"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_article_title" />
+            app:layout_constraintTop_toBottomOf="@id/tv_result_title" />
 
         <TextView
-            android:id="@+id/tvChapterName"
+            android:id="@+id/tv_result_ChapterName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_8"
             android:textColor="@color/color_666666"
             android:textSize="@dimen/sp_13"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_article_desc"
+            app:layout_constraintTop_toBottomOf="@id/tv_result_desc"
             tools:text="大厂分享-对外分享" />
+
+        <ImageView
+            android:id="@+id/rv_result_collect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:src="@drawable/no_collect_svg_icon"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_result_desc" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

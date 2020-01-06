@@ -1,5 +1,6 @@
 package org.lym.wanandroid_kotlin.mvvm.viewmodel
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -10,6 +11,9 @@ import io.reactivex.disposables.Disposable
  * date: 2019-12-31-19:07
  */
 open class AutoDisposeViewModel : ViewModel() {
+    val loadEnd = MutableLiveData<Boolean>()
+    val loadMoreComplete = MutableLiveData<Boolean>()
+
     private val dispose by lazy {
         CompositeDisposable()
     }
