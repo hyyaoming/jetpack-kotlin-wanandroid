@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/brvah_load_end"
+            android:text="@string/load_end"
             android:textColor="@android:color/darker_gray" />
     </FrameLayout>
 </FrameLayout>

@@ -11,9 +11,9 @@ import org.lym.wanandroid_kotlin.R
 /**
  * 功能类似于TagFlowLayout,但是这个支持设置显示最多行数，最多个数，对于子View点击事件支持不太友好。
  *
- * @author: ym.li
- * @since: 2018/8/7/007
- * @version: 2.1.0
+ * author: liyaoming
+ * email: liyaoming@bixin.cn
+ * date: 2020-01-03-20:35
  */
 class FloatLayout @JvmOverloads constructor(
     context: Context,

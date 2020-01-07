@@ -13,4 +13,5 @@
     <color name="color_FF3030">#FF3030</color>
     <color name="color_F1F1F1">#F1F1F1</color>
     <color name="color_EEE9E9">#EEE9E9</color>
+    <color name="little_black">#C0000000</color>
 </resources>

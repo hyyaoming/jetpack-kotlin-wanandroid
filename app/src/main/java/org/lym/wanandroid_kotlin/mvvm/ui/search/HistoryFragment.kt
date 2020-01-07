@@ -24,6 +24,7 @@ import org.lym.wanandroid_kotlin.mvvm.ViewModelFactory
 import org.lym.wanandroid_kotlin.mvvm.adapter.SearchHistoryAdapter
 import org.lym.wanandroid_kotlin.mvvm.ui.BaseFragment
 import org.lym.wanandroid_kotlin.mvvm.viewmodel.HistoryViewModel
+import org.lym.wanandroid_kotlin.mvvm.viewmodel.SearchResultViewModel
 import org.lym.wanandroid_kotlin.utils.dip2px
 import org.lym.wanandroid_kotlin.utils.hide
 import org.lym.wanandroid_kotlin.utils.toast
@@ -40,6 +41,11 @@ import per.goweii.actionbarex.common.ActionBarSearch
 class HistoryFragment : BaseFragment() {
     private lateinit var headView: View
     private lateinit var searchView: ActionBarSearch
+    private val navHostFragment by lazy {
+        requireActivity().supportFragmentManager.findFragmentById(
+            R.id.nav_search_host_fragment
+        )!!
+    }
 
     private val viewModel: HistoryViewModel by viewModels {
         ViewModelFactory(SearchRepository.getInstance(AppDataBase.getInstance().keyWordsDao()))
@@ -65,17 +71,21 @@ class HistoryFragment : BaseFragment() {
         val historyFl = headView.findViewById<FloatLayout>(R.id.fl_history)
         val historyIcon = headView.findViewById<TextView>(R.id.tv_history_search)
         val clearHistory = headView.findViewById<ImageView>(R.id.iv_clear_history)
+
         if (list.isEmpty()) {
-            historyFl.visibility = View.GONE
-            historyIcon.visibility = View.GONE
-            clearHistory.visibility = View.GONE
+            hideHistoryView(historyFl, historyIcon, clearHistory)
         } else {
             historyFl.visibility = View.VISIBLE
             historyIcon.visibility = View.VISIBLE
             clearHistory.visibility = View.VISIBLE
+
             clearHistory.setOnClickListener {
-                viewModel.clearHistory()
+                viewModel.clearHistory(list)
+                viewModel.deleteWords.observe(this, Observer {
+                    hideHistoryView(historyFl, historyIcon, clearHistory)
+                })
             }
+
             historyFl.removeAllViews()
             list.forEach { word ->
                 historyFl.addView(getTagView(word.wordName).apply {
@@ -85,13 +95,23 @@ class HistoryFragment : BaseFragment() {
                 })
             }
         }
+    }
 
+    private fun hideHistoryView(
+        historyFl: FloatLayout,
+        historyIcon: TextView,
+        clearHistory: ImageView
+    ) {
+        historyFl.visibility = View.GONE
+        historyIcon.visibility = View.GONE
+        clearHistory.visibility = View.GONE
     }
 
     private fun addHeadView(list: List<HotWordModel>) {
         headView = LayoutInflater.from(requireActivity())
             .inflate(R.layout.head_hot_and_history_word_layout, rv_history, false)
         val hotFl = headView.findViewById<FloatLayout>(R.id.fl_hot_word)
+
         hotFl.removeAllViews()
         list.forEach { word ->
             hotFl.addView(getTagView(word.name).apply {
@@ -177,11 +197,22 @@ class HistoryFragment : BaseFragment() {
     private fun search(key: String) {
         searchView.editTextView.setText(key)
         searchView.editTextView.setSelection(searchView.editTextView.length())
-        viewModel.searchRepository.insertSearchWord(key)
-        requireActivity().findNavController(R.id.nav_search_host_fragment)
-            .navigate(
-                R.id.action_search_result_fragment,
-                Bundle().apply { putString("search_key", key) })
+        viewModel.insertWord(key)
+        val fragment = navHostFragment.childFragmentManager.primaryNavigationFragment!!
+        if (fragment::class.java.simpleName == "HistoryFragment") {
+            requireActivity().findNavController(R.id.nav_search_host_fragment)
+                .navigate(
+                    R.id.action_search_result_fragment,
+                    Bundle().apply { putString("search_key", key) })
+        } else {
+            val viewModel = (fragment as BaseFragment).getViewModel()
+            viewModel?.let {
+                if ((viewModel as SearchResultViewModel).searchKey != key
+                ) {
+                    viewModel.searchArticle(key)
+                }
+            }
+        }
     }
 
 }

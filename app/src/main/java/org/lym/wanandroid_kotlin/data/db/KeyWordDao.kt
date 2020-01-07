@@ -1,13 +1,8 @@
 package org.lym.wanandroid_kotlin.data.db
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import org.lym.wanandroid_kotlin.data.db.model.KeyWord
-import retrofit2.http.DELETE
 
 /**
  * 搜索历史数据库操作
@@ -33,4 +28,12 @@ interface KeyWordDao {
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertWord(word: KeyWord)
+
+    /**
+     * 删除历史搜索记录
+     *
+     * @param words 历史记录
+     */
+    @Delete
+    fun deleteHistory(words: List<KeyWord>)
 }

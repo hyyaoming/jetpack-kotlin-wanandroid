@@ -46,6 +46,7 @@ class IndexViewModel(var indexRepository: IndexRepository) : AutoDisposeViewMode
                         }
                     }
                     model?.datas?.let { result.addAll(it) }
+                    loadMoreComplete.postValue(true)
                     result
                 }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -74,6 +75,8 @@ class IndexViewModel(var indexRepository: IndexRepository) : AutoDisposeViewMode
                             articleData.value = datas
                             if (over) {
                                 loadEnd.value = over
+                            } else {
+                                loadMoreComplete.value = true
                             }
                         }
                     }
@@ -88,19 +91,23 @@ class IndexViewModel(var indexRepository: IndexRepository) : AutoDisposeViewMode
      * @param position  下标
      */
     fun unCollect(model: ArticleModel, position: Int) {
-        addDispose(indexRepository.unCollect(model.id, object : RequestObserver<CommonModel>() {
-            override fun onSuccess(data: CommonModel?) {
-                super.onSuccess(data)
-                toast("已取消收藏")
-                model.collect = !model.collect
-                articleCollect.value = position
-            }
+        addDispose(
+            indexRepository.unCollect(
+                model.id,
+                object : RequestObserver<CommonModel>(requestTipLoading) {
+                    override fun onSuccess(data: CommonModel?) {
+                        super.onSuccess(data)
+                        toast("已取消收藏")
+                        model.collect = !model.collect
+                        articleCollect.value = position
+                    }
 
-            override fun onFailed(code: Int, msg: String) {
-                super.onFailed(code, msg)
-                toast(msg)
-            }
-        }))
+                    override fun onFailed(code: Int, msg: String) {
+                        super.onFailed(code, msg)
+                        toast(msg)
+                    }
+                })
+        )
     }
 
     /**
@@ -110,19 +117,23 @@ class IndexViewModel(var indexRepository: IndexRepository) : AutoDisposeViewMode
      * @param position  下标
      */
     fun collect(model: ArticleModel, position: Int) {
-        addDispose(indexRepository.collect(model.id, object : RequestObserver<CommonModel>() {
-            override fun onSuccess(data: CommonModel?) {
-                super.onSuccess(data)
-                toast("已收藏")
-                model.collect = !model.collect
-                articleCollect.value = position
-            }
+        addDispose(
+            indexRepository.collect(
+                model.id,
+                object : RequestObserver<CommonModel>(requestTipLoading) {
+                    override fun onSuccess(data: CommonModel?) {
+                        super.onSuccess(data)
+                        toast("已收藏")
+                        model.collect = !model.collect
+                        articleCollect.value = position
+                    }
 
-            override fun onFailed(code: Int, msg: String) {
-                super.onFailed(code, msg)
-                toast(msg)
-            }
-        }))
+                    override fun onFailed(code: Int, msg: String) {
+                        super.onFailed(code, msg)
+                        toast(msg)
+                    }
+                })
+        )
     }
 
 }

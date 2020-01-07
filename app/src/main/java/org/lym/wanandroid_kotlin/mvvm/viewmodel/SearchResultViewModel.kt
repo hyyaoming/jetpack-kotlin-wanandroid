@@ -21,9 +21,15 @@ class SearchResultViewModel(private val searchRepository: SearchRepository) :
     val articleCollect = MutableLiveData<Int>()
     var searchKey: String? = ""
     val searchResult = MutableLiveData<MutableList<ArticleModel>>()
+    val searchResultMore = MutableLiveData<MutableList<ArticleModel>>()
     var page = 0
 
-    fun searchArticle(key: String? = "") {
+    /**
+     * 获取搜索结果
+     *
+     * @param key   搜索关键字
+     */
+    fun searchArticle(key: String? = "", more: Boolean = false) {
         key?.let {
             searchKey = key
             searchRepository.searchArticle(page, it, object : RequestObserver<ArticleListModel>() {
@@ -31,9 +37,14 @@ class SearchResultViewModel(private val searchRepository: SearchRepository) :
                     super.onSuccess(data)
                     data?.apply {
                         page = curPage
-                        searchResult.value = datas
+                        if (more) {
+                            searchResultMore.value = datas
+                        } else {
+                            searchResult.value = datas
+                        }
+                        loadMoreComplete.value = true
                         if (over) {
-                            loadEnd.value = over
+                            loadEnd.value = false
                         }
                     }
                 }
@@ -42,7 +53,7 @@ class SearchResultViewModel(private val searchRepository: SearchRepository) :
     }
 
     fun loadMore() {
-        searchArticle(searchKey)
+        searchArticle(searchKey, true)
     }
 
     /**

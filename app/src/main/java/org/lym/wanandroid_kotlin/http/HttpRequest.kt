@@ -4,6 +4,10 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import org.lym.wanandroid_kotlin.common.LOAD_ERROR
+import org.lym.wanandroid_kotlin.common.LOAD_FINISH
+import org.lym.wanandroid_kotlin.common.LOAD_STAR
+import org.lym.wanandroid_kotlin.data.RequestObserver
 import org.lym.wanandroid_kotlin.http.exception.ApiException
 import org.lym.wanandroid_kotlin.http.exception.ExceptionHandle
 
@@ -23,7 +27,7 @@ class HttpRequest<T, R : BaseResponse<T>> private constructor(observable: Observ
      *
      * @return Disposable 用于中断请求，管理请求生命周期
      */
-    fun request(callback: RequestCallback<T>): Disposable {
+    fun request(callback: RequestObserver<T>): Disposable {
         return mObservable.subscribe({ bean ->
             if (!bean.isSuccess()) {
                 throw ApiException(bean.errorCode, bean.errorMsg)
@@ -35,13 +39,19 @@ class HttpRequest<T, R : BaseResponse<T>> private constructor(observable: Observ
             } else {
                 val handle = ExceptionHandle()
                 handle.handle(e)
-                callback.onError(handle)
+                callback.loadState?.postValue(LOAD_ERROR)
+                callback.tipLoadState?.postValue(LOAD_ERROR)
             }
-            callback.onFinish()
+            callback.loadState?.postValue(LOAD_FINISH)
+            callback.tipLoadState?.postValue(LOAD_FINISH)
+
         }, {
-            callback.onFinish()
+            callback.loadState?.postValue(LOAD_FINISH)
+            callback.tipLoadState?.postValue(LOAD_FINISH)
         }, {
-            callback.onStart()
+            callback.loadState?.postValue(LOAD_STAR)
+            callback.tipLoadState?.postValue(LOAD_STAR)
+
         })
     }
 

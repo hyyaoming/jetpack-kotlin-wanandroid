@@ -1,12 +1,14 @@
 package org.lym.wanandroid_kotlin.data.repository
 
 import io.reactivex.Observable
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import org.lym.wanandroid_kotlin.data.RequestObserver
 import org.lym.wanandroid_kotlin.data.db.KeyWordDao
 import org.lym.wanandroid_kotlin.data.db.model.KeyWord
 import org.lym.wanandroid_kotlin.data.model.HotWordModel
 import org.lym.wanandroid_kotlin.http.HttpRequest
+import org.lym.wanandroid_kotlin.http.exception.ApiException
 import org.lym.wanandroid_kotlin.http.getApiService
 
 /**
@@ -35,11 +37,32 @@ class SearchRepository private constructor(private val wordDao: KeyWordDao) : Ar
      *
      * @param word  搜索关键字
      */
-    fun insertSearchWord(word: String) {
+    fun insertSearchWord(word: String): Disposable =
         Observable.create<Any> {
             wordDao.insertWord(KeyWord(word))
         }.subscribeOn(Schedulers.io())
             .subscribe()
+
+
+    /**
+     * 删除历史搜索记录
+     *
+     * @param words 历史搜索关键字
+     * @param requestObserver   回调
+     * @return  返回dispose
+     */
+    fun deleteWords(
+        words: List<KeyWord>,
+        requestObserver: RequestObserver<Boolean>
+    ): Disposable {
+        return Observable.create<Any> {
+            wordDao.deleteHistory(words)
+        }.subscribeOn(Schedulers.io())
+            .subscribe({
+                requestObserver.onSuccess(true)
+            }, {
+                requestObserver.onFailed(0, "error")
+            })
     }
 
     companion object {

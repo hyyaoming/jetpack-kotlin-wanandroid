@@ -1,26 +1,20 @@
 package org.lym.wanandroid_kotlin.data
 
-import org.lym.wanandroid_kotlin.http.RequestCallback
-import org.lym.wanandroid_kotlin.http.exception.ExceptionHandle
+import androidx.lifecycle.MutableLiveData
 
 /**
  * author: liyaoming
  * email: liyaoming@bixin.cn
  * date: 2019-12-31-18:45
  */
-open class RequestObserver<T> : RequestCallback<T> {
-    override fun onStart() {
+open class RequestObserver<T>(
+    var loadState: MutableLiveData<Int>? = null,
+    val tipLoadState: MutableLiveData<Int>? = null
+) {
+
+    open fun onSuccess(data: T?) {
     }
 
-    override fun onError(handle: ExceptionHandle) {
-    }
-
-    override fun onFinish() {
-    }
-
-    override fun onSuccess(data: T?) {
-    }
-
-    override fun onFailed(code: Int, msg: String) {
+    open fun onFailed(code: Int, msg: String) {
     }
 }

@@ -12,3 +12,7 @@ const val ERROR_CODE = 1000
 const val SUCCESS = 1
 
 const val DATABASE_NAME = "wanandroid.db"
+
+const val LOAD_STAR = 0
+const val LOAD_FINISH = 1
+const val LOAD_ERROR = 2
