@@ -18,8 +18,8 @@ import javax.net.ssl.SSLException
 class ExceptionHandle {
 
     private var e: Throwable? = null
-    private var code: Int = 0
-    private var msg: String = ""
+    var code: Int = 0
+    var msg: String = ""
 
     fun handle(e: Throwable) {
         this.e = e

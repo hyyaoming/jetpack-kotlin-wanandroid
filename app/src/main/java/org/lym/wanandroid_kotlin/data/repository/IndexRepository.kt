@@ -4,7 +4,7 @@ import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import org.lym.wanandroid_kotlin.data.model.BannerModel
 import org.lym.wanandroid_kotlin.http.BaseResponse
-import org.lym.wanandroid_kotlin.http.getApiService
+import org.lym.wanandroid_kotlin.http.getWanApiService
 
 /**
  * 首页请求仓库
@@ -19,7 +19,7 @@ class IndexRepository : ArticleRepository() {
      * 请求banner数据
      */
     fun bannerObservable(): Observable<BaseResponse<MutableList<BannerModel>>> =
-        getApiService().getBanner().subscribeOn(Schedulers.io())
+        getWanApiService().getBanner().subscribeOn(Schedulers.io())
 
     companion object {
 

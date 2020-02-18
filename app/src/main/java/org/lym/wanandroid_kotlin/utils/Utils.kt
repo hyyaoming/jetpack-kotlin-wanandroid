@@ -36,6 +36,11 @@ fun toast(content: CharSequence?) {
     }
 }
 
+fun getScreenWidth(): Int {
+    return WanApp.getContext().resources.displayMetrics.widthPixels
+}
+
+
 fun Context.view(resource: Int, container: ViewGroup?, attchToRoot: Boolean): View {
     return LayoutInflater.from(this).inflate(resource, container, attchToRoot)
 }

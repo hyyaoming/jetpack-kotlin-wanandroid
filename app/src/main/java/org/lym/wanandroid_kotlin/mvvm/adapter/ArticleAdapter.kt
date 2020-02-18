@@ -14,6 +14,7 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import org.lym.wanandroid_kotlin.R
 import org.lym.wanandroid_kotlin.data.model.*
 import org.lym.wanandroid_kotlin.http.glide.ImageLoader
+import org.lym.wanandroid_kotlin.mvvm.adapter.diff.IndexDiffer
 import org.lym.wanandroid_kotlin.utils.toast
 
 /**
@@ -29,6 +30,7 @@ class ArticleAdapter : BaseMultiItemQuickAdapter<MultiItemEntity, BaseViewHolder
     init {
         addItemType(BANNER, R.layout.cell_banner_layout)
         addItemType(ARTICLE, R.layout.cell_aericle_layout)
+        setDiffCallback(IndexDiffer())
     }
 
     override fun convert(helper: BaseViewHolder, item: MultiItemEntity?) {

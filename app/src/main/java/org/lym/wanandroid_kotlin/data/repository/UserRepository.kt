@@ -3,7 +3,7 @@ package org.lym.wanandroid_kotlin.data.repository
 import org.lym.wanandroid_kotlin.data.RequestObserver
 import org.lym.wanandroid_kotlin.data.model.LoginModel
 import org.lym.wanandroid_kotlin.http.HttpRequest
-import org.lym.wanandroid_kotlin.http.getApiService
+import org.lym.wanandroid_kotlin.http.getWanApiService
 
 /**
  * 用户中心数据来源
@@ -21,7 +21,7 @@ class UserRepository : Repository {
      * @param requestObserver   请求回调
      */
     fun login(username: String, password: String, requestObserver: RequestObserver<LoginModel>) {
-        HttpRequest.create(getApiService().login(username, password))
+        HttpRequest.create(getWanApiService().login(username, password))
             .request(requestObserver)
     }
 

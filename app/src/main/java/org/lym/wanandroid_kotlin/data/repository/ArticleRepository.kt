@@ -5,7 +5,7 @@ import org.lym.wanandroid_kotlin.data.model.ArticleListModel
 import org.lym.wanandroid_kotlin.data.model.ArticleModel
 import org.lym.wanandroid_kotlin.data.model.CommonModel
 import org.lym.wanandroid_kotlin.http.HttpRequest
-import org.lym.wanandroid_kotlin.http.getApiService
+import org.lym.wanandroid_kotlin.http.getWanApiService
 
 /**
  * 文章仓库基类
@@ -23,7 +23,7 @@ abstract class ArticleRepository : Repository {
      * @return  返回Dispose
      */
     fun collect(id: Int, requestObserver: RequestObserver<CommonModel>) =
-        HttpRequest.create(getApiService().collect(id)).request(requestObserver)
+        HttpRequest.create(getWanApiService().collect(id)).request(requestObserver)
 
     /**
      * 取消收藏
@@ -33,7 +33,7 @@ abstract class ArticleRepository : Repository {
      * @return 返回Dispose
      */
     fun unCollect(id: Int, requestObserver: RequestObserver<CommonModel>) =
-        HttpRequest.create(getApiService().unCollect(id)).request(requestObserver)
+        HttpRequest.create(getWanApiService().unCollect(id)).request(requestObserver)
 
 
     /**
@@ -42,7 +42,7 @@ abstract class ArticleRepository : Repository {
      * @param page  页码
      */
     fun articleObservable(page: Int) =
-        getApiService().getArticleList(page)
+        getWanApiService().getArticleList(page)
 
     /**
      * 获取首页文章列表
@@ -59,7 +59,7 @@ abstract class ArticleRepository : Repository {
      * @param requestObserver   请求回调
      */
     fun getTopArticleList(requestObserver: RequestObserver<MutableList<ArticleModel>>) =
-        HttpRequest.create(getApiService().getTopArticleList()).request(requestObserver)
+        HttpRequest.create(getWanApiService().getTopArticleList()).request(requestObserver)
 
     /**
      * 搜索文章
@@ -69,5 +69,5 @@ abstract class ArticleRepository : Repository {
      * @param requestObserver   请求回调
      */
     fun searchArticle(page: Int, key: String, requestObserver: RequestObserver<ArticleListModel>) =
-        HttpRequest.create(getApiService().searchArticle(page, key)).request(requestObserver)
+        HttpRequest.create(getWanApiService().searchArticle(page, key)).request(requestObserver)
 }

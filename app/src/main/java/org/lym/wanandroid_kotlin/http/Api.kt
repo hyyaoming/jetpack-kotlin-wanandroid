@@ -1,6 +1,7 @@
 package org.lym.wanandroid_kotlin.http
 
 import io.reactivex.Observable
+import org.lym.wanandroid_kotlin.common.GANK_IO_URL
 import org.lym.wanandroid_kotlin.data.model.*
 import retrofit2.http.*
 
@@ -87,8 +88,22 @@ interface Api {
     @POST("article/query/{page}/json")
     fun searchArticle(@Path("page") page: Int, @Field("k") key: String): Observable<BaseResponse<ArticleListModel>>
 
+    //-------------------------玩Android相关Api-------------
+    /**
+     * 获取Gank.Io提供的妹纸图
+     *
+     * @param page  页码
+     * @return  返回Observable观察流
+     */
+    @GET("api/data/福利/10/{page}")
+    fun getGankMeiZhi(@Path("page") page: Int): Observable<GankMeiZhi>
+
 }
 
-fun getApiService(): Api {
+fun getWanApiService(): Api {
     return HttpClient.getInstance().getService(Api::class.java)
+}
+
+fun getGankApiService(): Api {
+    return HttpClient.getInstance().getService(GANK_IO_URL, Api::class.java)
 }

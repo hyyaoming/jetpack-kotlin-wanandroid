@@ -7,6 +7,8 @@ package org.lym.wanandroid_kotlin.common
  */
 const val BASE_URL = "https://www.wanandroid.com/"
 
+const val GANK_IO_URL = "https://gank.io/"
+
 const val ERROR_CODE = 1000
 
 const val SUCCESS = 1

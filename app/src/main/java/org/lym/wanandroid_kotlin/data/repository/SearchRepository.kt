@@ -8,8 +8,7 @@ import org.lym.wanandroid_kotlin.data.db.KeyWordDao
 import org.lym.wanandroid_kotlin.data.db.model.KeyWord
 import org.lym.wanandroid_kotlin.data.model.HotWordModel
 import org.lym.wanandroid_kotlin.http.HttpRequest
-import org.lym.wanandroid_kotlin.http.exception.ApiException
-import org.lym.wanandroid_kotlin.http.getApiService
+import org.lym.wanandroid_kotlin.http.getWanApiService
 
 /**
  * 搜索仓库
@@ -25,7 +24,7 @@ class SearchRepository private constructor(private val wordDao: KeyWordDao) : Ar
      * @param requestObserver   请求回调
      */
     fun getHotWork(requestObserver: RequestObserver<MutableList<HotWordModel>>) =
-        HttpRequest.create(getApiService().hotWork()).request(requestObserver)
+        HttpRequest.create(getWanApiService().hotWork()).request(requestObserver)
 
     /**
      * 获取历史搜索记录

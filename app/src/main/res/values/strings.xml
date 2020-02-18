@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">耍安卓</string>
     <string name="index">首页</string>
+    <string name="Gank">Gank</string>
     <string name="category">分类</string>
     <string name="resource">资源</string>
     <string name="user_center">我的</string>

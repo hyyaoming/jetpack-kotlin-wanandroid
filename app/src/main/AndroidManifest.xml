@@ -25,6 +25,7 @@
 
         </activity>
         <activity android:name="org.lym.wanandroid_kotlin.mvvm.ui.search.SearchActivity" />
+        <activity android:name=".mvvm.ui.gank.GankMeiZhiActivity" />
     </application>
 
 </manifest>

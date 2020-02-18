@@ -39,6 +39,7 @@ class HttpRequest<T, R : BaseResponse<T>> private constructor(observable: Observ
             } else {
                 val handle = ExceptionHandle()
                 handle.handle(e)
+                callback.onFailed(handle.code, handle.msg)
                 callback.loadState?.postValue(LOAD_ERROR)
                 callback.tipLoadState?.postValue(LOAD_ERROR)
             }

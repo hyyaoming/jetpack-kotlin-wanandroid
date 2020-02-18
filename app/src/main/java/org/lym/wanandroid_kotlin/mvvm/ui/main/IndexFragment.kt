@@ -14,6 +14,7 @@ import org.lym.wanandroid_kotlin.data.repository.IndexRepository
 import org.lym.wanandroid_kotlin.mvvm.ViewModelFactory
 import org.lym.wanandroid_kotlin.mvvm.adapter.ArticleAdapter
 import org.lym.wanandroid_kotlin.mvvm.ui.BaseFragment
+import org.lym.wanandroid_kotlin.mvvm.ui.gank.GankMeiZhiActivity
 import org.lym.wanandroid_kotlin.mvvm.ui.search.SearchActivity
 import org.lym.wanandroid_kotlin.mvvm.viewmodel.AutoDisposeViewModel
 import org.lym.wanandroid_kotlin.mvvm.viewmodel.IndexViewModel
@@ -48,7 +49,7 @@ class IndexFragment : BaseFragment() {
 
     override fun subscribeUI() {
         indexViewModel.mutableData.observe(this, Observer {
-            adapter.setNewData(it)
+            adapter.setDiffNewData(it)
         })
 
         indexViewModel.articleData.observe(this, Observer {
@@ -70,7 +71,7 @@ class IndexFragment : BaseFragment() {
         rv_index.adapter = adapter
 
         title_bar.setOnLeftIconClickListener {
-            toast("广场")
+            startActivity(Intent(requireActivity(), GankMeiZhiActivity::class.java))
         }
 
         title_bar.setOnRightIconClickListener {

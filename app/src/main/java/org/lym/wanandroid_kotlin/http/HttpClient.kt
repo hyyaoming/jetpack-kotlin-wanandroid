@@ -19,6 +19,8 @@ import retrofit2.converter.gson.GsonConverterFactory
  */
 class HttpClient private constructor() {
 
+    private var retrofits: MutableMap<String, Retrofit> = hashMapOf()
+
     private val cookieJar by lazy {
         PersistentCookieJar(
             SetCookieCache(),
@@ -26,16 +28,26 @@ class HttpClient private constructor() {
         )
     }
 
-    private val mRetrofit: Retrofit by lazy {
-        val client = OkHttpClient.Builder().cookieJar(cookieJar).build()
-        Retrofit.Builder().client(client).baseUrl(BASE_URL)
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+    private fun getRetrofit(baseUrl: String): Retrofit {
+        return if (retrofits.containsKey(baseUrl)) {
+            retrofits.getValue(baseUrl)
+        } else {
+            val client = OkHttpClient.Builder().cookieJar(cookieJar).build()
+            val retrofit = Retrofit.Builder().client(client).baseUrl(baseUrl)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+            retrofits[baseUrl] = retrofit
+            retrofit
+        }
+    }
+
+    fun <T> getService(baseUrl: String, clazz: Class<T>): T {
+        return getInstance().getRetrofit(baseUrl).create(clazz)
     }
 
     fun <T> getService(clazz: Class<T>): T {
-        return getInstance().mRetrofit.create(clazz)
+        return getService(BASE_URL, clazz)
     }
 
     companion object {
