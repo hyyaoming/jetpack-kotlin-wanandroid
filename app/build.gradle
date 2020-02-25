@@ -51,7 +51,7 @@ dependencies {
     implementation rootProject.ext.dependencies.recyclerview_adapter
     implementation rootProject.ext.dependencies.viewpager2
     implementation rootProject.ext.dependencies.glide
-    annotationProcessor rootProject.ext.dependencies.glide_compiler
+    kapt rootProject.ext.dependencies.glide_compiler
     implementation rootProject.ext.dependencies.cookieJar
     implementation rootProject.ext.dependencies.room
     implementation rootProject.ext.dependencies.room_ktx
