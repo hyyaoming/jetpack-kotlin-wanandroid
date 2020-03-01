@@ -15,16 +15,11 @@ import java.io.File
 import java.util.*
 
 /**
- * Main workflow: <br></br>
  * 1、点击缩略图展示缩略图到 transferee 过渡动画 <br></br>
  * 2、显示下载高清图片进度 <br></br>
  * 3、加载完成显示高清图片 <br></br>
  * 4、高清图支持手势缩放 <br></br>
  * 5、关闭 transferee 展示 transferee 到原缩略图的过渡动画 <br></br>
- * Created by hitomi on 2017/1/19.
- *
- *
- * email: 196425254@qq.com
  */
 class Transferee private constructor(private val context: Context) : OnShowListener,
     DialogInterface.OnKeyListener, OnLayoutResetListener {
@@ -94,8 +89,10 @@ class Transferee private constructor(private val context: Context) : OnShowListe
             val childCount = it.childCount
             for (i in 0 until childCount) {
                 val originImage = it.getChildAt(i)
-                    .findViewById<View>(transConfig.imageId) as ImageView
-                originImageList.add(originImage)
+                    .findViewById<View>(transConfig.imageId) as? ImageView
+                originImage.apply {
+                    originImageList.add(this)
+                }
             }
             val layoutManager = it.layoutManager ?: return
             var firstPos = 0
@@ -117,8 +114,10 @@ class Transferee private constructor(private val context: Context) : OnShowListe
             val childCount = it.childCount
             for (i in 0 until childCount) {
                 val originImage = it.getChildAt(i)
-                    .findViewById<View>(transConfig.imageId) as ImageView
-                originImageList.add(originImage)
+                    .findViewById<View>(transConfig.imageId) as? ImageView
+                originImage?.apply {
+                    originImageList.add(this)
+                }
             }
             val firstPos = it.firstVisiblePosition
             val lastPos = it.lastVisiblePosition
@@ -272,11 +271,6 @@ class Transferee private constructor(private val context: Context) : OnShowListe
         }
     }
 
-    /**
-     * 构造方法私有化，通过[.getDefault] 创建 transferee
-     *
-     * @param context 上下文环境
-     */
     init {
         createLayout()
         createDialog()
