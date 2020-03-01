@@ -26,6 +26,9 @@ ext {
             cookieJar           : "v1.0.1",
             room                : "2.2.3",
             title_bar           : "3.2.4",
+            progresspieview     : "1.0.4",
+            gif_drawable        : "1.2.19",
+            util                : "1.26.0"
 
     ]
 
@@ -61,6 +64,8 @@ ext {
             room_ktx               : "androidx.room:room-ktx:$versions.room",
             room_compiler          : "androidx.room:room-compiler:$versions.room",
             title_bar              : "com.github.goweii:ActionBarEx:$versions.title_bar",
-
+            progresspieview        : "com.github.filippudak.progresspieview:library:$versions.progresspieview",
+            gif_drawable           : "pl.droidsonroids.gif:android-gif-drawable:$versions.gif_drawable",
+            util           : "com.blankj:utilcodex:$versions.util"
     ]
 }

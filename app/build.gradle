@@ -57,6 +57,10 @@ dependencies {
     implementation rootProject.ext.dependencies.room_ktx
     kapt rootProject.ext.dependencies.room_compiler
     implementation rootProject.ext.dependencies.title_bar
+    implementation rootProject.ext.dependencies.progresspieview
+    implementation rootProject.ext.dependencies.gif_drawable
+    implementation rootProject.ext.dependencies.util
+
 
 
 }

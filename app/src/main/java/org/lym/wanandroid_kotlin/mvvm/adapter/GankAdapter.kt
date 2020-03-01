@@ -6,7 +6,7 @@ import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import org.lym.wanandroid_kotlin.R
 import org.lym.wanandroid_kotlin.data.model.MeiZhi
-import org.lym.wanandroid_kotlin.http.glide.ImageLoader
+import org.lym.wanandroid_kotlin.http.glide.GlideLoader
 import org.lym.wanandroid_kotlin.utils.dip2px
 import org.lym.wanandroid_kotlin.utils.getScreenWidth
 
@@ -27,13 +27,9 @@ class GankAdapter : BaseQuickAdapter<MeiZhi, BaseViewHolder>(R.layout.cell_gank_
     }
 
     override fun convert(helper: BaseViewHolder, item: MeiZhi?) {
-        var meiZhiUrl = item?.url
-        if (meiZhiUrl?.contains("http://")!!) {
-            meiZhiUrl = meiZhiUrl.replace("http://", "https://")
-        }
-        ImageLoader.image(helper.itemView as ImageView, meiZhiUrl)
+        GlideLoader.image(helper.itemView as ImageView, item?.httpsUrl())
         val params = helper.itemView.layoutParams
         params.width = cellWidth
-        params.height = (cellWidth * 1.45F + 0.5F).toInt()
+        params.height = (cellWidth * 1.2F + 0.5F).toInt()
     }
 }

@@ -22,4 +22,13 @@ data class MeiZhi(
     var url: String,
     var used: Boolean? = null,
     var who: String
-)
+) {
+
+    fun httpsUrl(): String {
+        var meiZhiUrl = url
+        if (meiZhiUrl.contains("http://")) {
+            meiZhiUrl = meiZhiUrl.replace("http://", "https://")
+        }
+        return meiZhiUrl
+    }
+}

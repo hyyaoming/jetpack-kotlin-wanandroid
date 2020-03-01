@@ -13,7 +13,7 @@ import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import org.lym.wanandroid_kotlin.R
 import org.lym.wanandroid_kotlin.data.model.*
-import org.lym.wanandroid_kotlin.http.glide.ImageLoader
+import org.lym.wanandroid_kotlin.http.glide.GlideLoader
 import org.lym.wanandroid_kotlin.mvvm.adapter.diff.IndexDiffer
 import org.lym.wanandroid_kotlin.utils.toast
 
@@ -77,7 +77,7 @@ class ArticleAdapter : BaseMultiItemQuickAdapter<MultiItemEntity, BaseViewHolder
                 bannerModel.banners
             ) {
                 override fun convert(helper: BaseViewHolder, item: BannerModel?) {
-                    ImageLoader.image(helper.itemView as ImageView, item?.imagePath)
+                    GlideLoader.image(helper.itemView as ImageView, item?.imagePath)
                 }
             }.apply {
                 setOnItemClickListener { _, _, position ->
