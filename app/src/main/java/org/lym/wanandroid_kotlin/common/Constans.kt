@@ -18,3 +18,6 @@ const val DATABASE_NAME = "wanandroid.db"
 const val LOAD_STAR = 0
 const val LOAD_FINISH = 1
 const val LOAD_ERROR = 2
+
+const val WEB_URL = "web_url"
+const val WEB_TITLE = "web_title"

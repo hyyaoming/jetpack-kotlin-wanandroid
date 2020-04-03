@@ -1,8 +1,6 @@
 package org.lym.wanandroid_kotlin.weight.preview.transfer
 
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
-import android.animation.ValueAnimator
+import android.animation.*
 import android.annotation.SuppressLint
 import android.graphics.RectF
 import android.view.*
@@ -80,6 +78,7 @@ internal class DragCloseGesture(private val transferLayout: TransferLayout) {
                     transViewPager.translationY = diffY
                     transViewPager.scaleX = scale
                     transViewPager.scaleY = scale
+                    transferLayout.transConfig.indexIndicator?.onHide()
                 } else {
                     transferLayout.setBackgroundColor(transferLayout.transConfig.backgroundColor)
                     transViewPager.translationX = diffX
@@ -161,6 +160,12 @@ internal class DragCloseGesture(private val transferLayout: TransferLayout) {
         }
         val animatorSet = AnimatorSet()
         animatorSet.playTogether(bgColor, scaleX, scaleY, transX, transY)
+        animatorSet.addListener(object  : AnimatorListenerAdapter(){
+            override fun onAnimationEnd(animation: Animator?) {
+                super.onAnimationEnd(animation)
+                transferLayout.transConfig.indexIndicator?.onShow(transViewPager)
+            }
+        })
         animatorSet.start()
     }
 

@@ -1,5 +1,7 @@
 package org.lym.wanandroid_kotlin.mvvm.adapter
 
+import android.content.Intent
+import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
@@ -12,10 +14,12 @@ import com.chad.library.adapter.base.entity.MultiItemEntity
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import org.lym.wanandroid_kotlin.R
+import org.lym.wanandroid_kotlin.common.WEB_TITLE
+import org.lym.wanandroid_kotlin.common.WEB_URL
 import org.lym.wanandroid_kotlin.data.model.*
 import org.lym.wanandroid_kotlin.http.glide.GlideLoader
 import org.lym.wanandroid_kotlin.mvvm.adapter.diff.IndexDiffer
-import org.lym.wanandroid_kotlin.utils.toast
+import org.lym.wanandroid_kotlin.mvvm.ui.WebActivity
 
 /**
  * 首页adapter
@@ -82,7 +86,12 @@ class ArticleAdapter : BaseMultiItemQuickAdapter<MultiItemEntity, BaseViewHolder
             }.apply {
                 setOnItemClickListener { _, _, position ->
                     val model = getItem(position)
-                    toast(model?.url)
+                    context.startActivity(Intent(context, WebActivity::class.java).apply {
+                        putExtras(Bundle().apply {
+                            putString(WEB_URL, model?.url)
+                            putString(WEB_TITLE, model?.title)
+                        })
+                    })
                 }
             }
     }

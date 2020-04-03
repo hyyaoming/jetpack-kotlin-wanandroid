@@ -12,7 +12,7 @@ data class BannerModel(
     var id: Int,
     var imagePath: String,
     var isVisible: Int,
-    var order: Int, var type: Int, var url: String
+    var order: Int, var type: Int, var url: String,var title : String
 )
 
 data class MultipleBannerModel(
