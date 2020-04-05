@@ -25,7 +25,6 @@ import per.goweii.actionbarex.common.ActionBarSearch
  * 搜索结果fragment
  *
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2020-01-04-17:11
  */
 class SearchResultFragment : BaseFragment() {

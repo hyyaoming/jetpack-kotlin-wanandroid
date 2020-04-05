@@ -4,7 +4,6 @@ package org.lym.wanandroid_kotlin.data.model
  * gank.io提供的妹纸
  *
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2020-02-18-12:06
  */
 data class GankMeiZhi(

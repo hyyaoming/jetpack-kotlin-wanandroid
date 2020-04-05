@@ -5,7 +5,6 @@ import org.lym.wanandroid_kotlin.mvvm.ui.BaseFragment
 
 /**
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2020-01-02-13:04
  */
 class SourceFragment : BaseFragment() {

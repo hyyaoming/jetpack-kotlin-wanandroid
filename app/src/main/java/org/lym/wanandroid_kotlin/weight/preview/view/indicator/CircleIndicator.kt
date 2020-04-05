@@ -5,7 +5,6 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
-import android.database.DataSetObserver
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
@@ -27,7 +26,7 @@ class CircleIndicator @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
-    private var mViewpager: ViewPager? = null
+    private lateinit var viewPager: ViewPager
     private var mIndicatorBackground: GradientDrawable? = null
     private var mAnimatorOut: Animator? = null
     private var mAnimatorIn: Animator? = null
@@ -37,19 +36,14 @@ class CircleIndicator @JvmOverloads constructor(
     private var mIndicatorWidth = -1
     private var mIndicatorHeight = -1
     private var mLastPosition = -1
-    private val mInternalPageChangeListener: OnPageChangeListener = object : OnPageChangeListener {
-        override fun onPageScrolled(
-            position: Int,
-            positionOffset: Float,
-            positionOffsetPixels: Int
-        ) {
-        }
+    private val mInternalPageChangeListener: OnPageChangeListener = object :
+        ViewPager.SimpleOnPageChangeListener() {
 
         override fun onPageSelected(position: Int) {
-            if (mViewpager!!.adapter == null || mViewpager!!.adapter!!.count <= 0) {
+            if (!::viewPager.isInitialized || viewPager.adapter == null || viewPager.adapter!!.count <= 0) {
                 return
             }
-            if (mAnimatorIn!!.isRunning) {
+            if (mAnimatorIn?.isRunning == true) {
                 mAnimatorIn!!.end()
                 mAnimatorIn!!.cancel()
             }
@@ -72,30 +66,6 @@ class CircleIndicator @JvmOverloads constructor(
                 mAnimatorOut!!.start()
             }
             mLastPosition = position
-        }
-
-        override fun onPageScrollStateChanged(state: Int) {}
-    }
-    val dataSetObserver: DataSetObserver = object : DataSetObserver() {
-        override fun onChanged() {
-            super.onChanged()
-            if (mViewpager == null || mViewpager!!.adapter == null) {
-                return
-            }
-            val newCount = mViewpager!!.adapter!!.count
-            val currentCount = childCount
-            mLastPosition = when {
-                newCount == currentCount -> { // No change
-                    return
-                }
-                mLastPosition < newCount -> {
-                    mViewpager!!.currentItem
-                }
-                else -> {
-                    -1
-                }
-            }
-            createIndicators()
         }
     }
 
@@ -176,36 +146,36 @@ class CircleIndicator @JvmOverloads constructor(
         return animatorIn
     }
 
-    fun setViewPager(viewPager: ViewPager?) {
-        mViewpager = viewPager
-        if (mViewpager != null && mViewpager!!.adapter != null) {
+    fun setViewPager(viewPager: ViewPager) {
+        this.viewPager = viewPager
+        if (this.viewPager.adapter != null) {
             mLastPosition = -1
             createIndicators()
-            mViewpager!!.removeOnPageChangeListener(mInternalPageChangeListener)
-            mViewpager!!.addOnPageChangeListener(mInternalPageChangeListener)
-            mInternalPageChangeListener.onPageSelected(mViewpager!!.currentItem)
+            this.viewPager.removeOnPageChangeListener(mInternalPageChangeListener)
+            this.viewPager.addOnPageChangeListener(mInternalPageChangeListener)
+            mInternalPageChangeListener.onPageSelected(this.viewPager.currentItem)
         }
     }
 
     @Deprecated("User ViewPager addOnPageChangeListener")
     fun setOnPageChangeListener(onPageChangeListener: OnPageChangeListener?) {
-        if (mViewpager == null) {
+        if (!::viewPager.isInitialized) {
             throw NullPointerException("can not find Viewpager , setViewPager first")
         }
-        mViewpager!!.removeOnPageChangeListener(onPageChangeListener!!)
-        mViewpager!!.addOnPageChangeListener(onPageChangeListener)
+        viewPager.removeOnPageChangeListener(onPageChangeListener!!)
+        viewPager.addOnPageChangeListener(onPageChangeListener)
     }
 
     private fun createIndicators() {
         removeAllViews()
-        if (mViewpager!!.adapter == null) {
+        if (viewPager.adapter == null) {
             return
         }
-        val count = mViewpager!!.adapter!!.count
+        val count = viewPager.adapter!!.count
         if (count <= 0) {
             return
         }
-        val currentItem = mViewpager!!.currentItem
+        val currentItem = viewPager.currentItem
         val orientation = orientation
         for (i in 0 until count) {
             if (currentItem == i) {

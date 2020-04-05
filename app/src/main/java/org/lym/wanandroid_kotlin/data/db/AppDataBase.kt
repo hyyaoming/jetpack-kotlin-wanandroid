@@ -13,7 +13,6 @@ import org.lym.wanandroid_kotlin.data.db.model.KeyWord
  * 本地数据库类
  *
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2020-01-04-11:32
  */
 @Database(entities = [KeyWord::class], version = 1, exportSchema = false)

@@ -5,7 +5,6 @@ import android.content.Context
 
 /**
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2019-12-31-15:46
  */
 class WanApp : Application() {

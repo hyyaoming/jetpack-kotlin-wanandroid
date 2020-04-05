@@ -16,7 +16,6 @@ import org.lym.wanandroid_kotlin.weight.LoadMore
  * 搜索结果
  *
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2020-01-06-17:16
  */
 class SearchResultAdapter :

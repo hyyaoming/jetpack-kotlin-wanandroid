@@ -20,15 +20,15 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <org.lym.wanandroid_kotlin.weight.FloatLayout
+    <com.qmuiteam.qmui.widget.QMUIFloatLayout
         android:id="@+id/fl_hot_word"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_8"
         android:maxLines="3"
-        app:childHorizontalSpacing="@dimen/dp_16"
-        app:childVerticalSpacing="@dimen/dp_12"
-        app:layout_constraintTop_toBottomOf="@id/tv_search_hot_word" />
+        app:layout_constraintTop_toBottomOf="@id/tv_search_hot_word"
+        app:qmui_childHorizontalSpacing="@dimen/dp_16"
+        app:qmui_childVerticalSpacing="@dimen/dp_12" />
 
     <TextView
         android:id="@+id/tv_history_search"
@@ -52,15 +52,15 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_history_search" />
 
-    <org.lym.wanandroid_kotlin.weight.FloatLayout
+    <com.qmuiteam.qmui.widget.QMUIFloatLayout
         android:id="@+id/fl_history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_8"
         android:maxLines="3"
-        app:childHorizontalSpacing="@dimen/dp_16"
-        app:childVerticalSpacing="@dimen/dp_12"
-        app:layout_constraintTop_toBottomOf="@id/tv_history_search" />
+        app:layout_constraintTop_toBottomOf="@id/tv_history_search"
+        app:qmui_childHorizontalSpacing="@dimen/dp_16"
+        app:qmui_childVerticalSpacing="@dimen/dp_12" />
 
     <TextView
         android:id="@+id/tv_top_article"

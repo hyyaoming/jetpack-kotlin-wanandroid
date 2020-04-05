@@ -6,7 +6,6 @@ import org.lym.wanandroid_kotlin.R
 
 /**
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2020-01-02-17:55
  */
 object GlideLoader {

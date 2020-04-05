@@ -14,7 +14,6 @@ import retrofit2.converter.gson.GsonConverterFactory
  * 网络请求配置类
  *
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2019-12-31-09:59
  */
 class HttpClient private constructor() {

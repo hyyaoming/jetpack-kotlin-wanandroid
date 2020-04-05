@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 
 /**
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2019-12-31-18:45
  */
 open class RequestObserver<T>(

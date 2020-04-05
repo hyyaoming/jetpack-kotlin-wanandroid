@@ -12,7 +12,6 @@ import org.lym.wanandroid_kotlin.utils.toast
  * 搜索结果
  *
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2020-01-06-14:52
  */
 class SearchResultViewModel(private val searchRepository: SearchRepository) :

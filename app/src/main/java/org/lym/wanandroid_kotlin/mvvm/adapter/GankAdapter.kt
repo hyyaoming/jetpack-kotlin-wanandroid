@@ -14,7 +14,6 @@ import org.lym.wanandroid_kotlin.utils.getScreenWidth
  * Gank.io adapter
  *
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2020-02-18-17:50
  */
 class GankAdapter : BaseQuickAdapter<MeiZhi, BaseViewHolder>(R.layout.cell_gank_item),

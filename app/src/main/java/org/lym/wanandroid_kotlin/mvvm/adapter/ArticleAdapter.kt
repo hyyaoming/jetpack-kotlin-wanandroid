@@ -25,7 +25,6 @@ import org.lym.wanandroid_kotlin.mvvm.ui.WebActivity
  * 首页adapter
  *
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2019-12-31-15:45
  */
 class ArticleAdapter : BaseMultiItemQuickAdapter<MultiItemEntity, BaseViewHolder>(),

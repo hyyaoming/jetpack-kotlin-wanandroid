@@ -15,7 +15,6 @@ import org.lym.wanandroid_kotlin.http.exception.ExceptionHandle
  * 描述：网络请求
  *
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2019-12-31-09:59
  */
 class HttpRequest<T, R : BaseResponse<T>> private constructor(observable: Observable<R>) {

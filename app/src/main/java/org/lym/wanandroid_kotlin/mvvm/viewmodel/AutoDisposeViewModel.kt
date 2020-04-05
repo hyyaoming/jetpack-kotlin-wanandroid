@@ -9,7 +9,6 @@ import io.reactivex.disposables.Disposable
  * ViewModel基类
  *
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2019-12-31-19:07
  */
 open class AutoDisposeViewModel : ViewModel() {

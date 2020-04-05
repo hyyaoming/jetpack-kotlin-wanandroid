@@ -15,7 +15,6 @@ import org.lym.wanandroid_kotlin.app.WanApp
 
 /**
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2019-12-31-15:45
  */
 fun isConnected(): Boolean {

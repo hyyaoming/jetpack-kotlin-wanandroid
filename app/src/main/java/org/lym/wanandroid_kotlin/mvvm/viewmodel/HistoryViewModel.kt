@@ -12,7 +12,6 @@ import org.lym.wanandroid_kotlin.utils.toast
  * 搜索历史ViewModel
  *
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2020-01-04-18:00
  */
 class HistoryViewModel(val searchRepository: SearchRepository) : AutoDisposeViewModel() {

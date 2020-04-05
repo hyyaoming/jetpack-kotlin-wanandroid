@@ -10,7 +10,6 @@ import org.lym.wanandroid_kotlin.utils.toast
  * Gank.io ViewModel
  *
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2020-02-18-17:38
  */
 class GankViewModel(val repository: GankRepository) : AutoDisposeViewModel() {

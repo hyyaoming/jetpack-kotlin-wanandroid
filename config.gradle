@@ -28,7 +28,8 @@ ext {
             title_bar           : "3.2.4",
             progresspieview     : "1.0.4",
             gif_drawable        : "1.2.19",
-            util                : "1.26.0"
+            util                : "1.26.0",
+            qmui                : "2.0.0-alpha04"
 
     ]
 
@@ -66,6 +67,8 @@ ext {
             title_bar              : "com.github.goweii:ActionBarEx:$versions.title_bar",
             progresspieview        : "com.github.filippudak.progresspieview:library:$versions.progresspieview",
             gif_drawable           : "pl.droidsonroids.gif:android-gif-drawable:$versions.gif_drawable",
-            util           : "com.blankj:utilcodex:$versions.util"
+            util                   : "com.blankj:utilcodex:$versions.util",
+            qmui         : "com.qmuiteam:qmui:$versions.qmui"
     ]
+
 }

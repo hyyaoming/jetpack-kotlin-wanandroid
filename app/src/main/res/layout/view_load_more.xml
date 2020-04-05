@@ -11,12 +11,12 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <org.lym.wanandroid_kotlin.weight.LoadingView
+        <com.qmuiteam.qmui.widget.QMUILoadingView
             android:id="@+id/loading_progress"
             android:layout_width="@dimen/dp_27"
             android:layout_height="@dimen/dp_27"
             android:color="@color/color_606060"
-            app:loading_view_size="@dimen/dp_16" />
+            app:qmui_loading_view_size="@dimen/dp_18" />
 
         <TextView
             android:id="@+id/loading_text"

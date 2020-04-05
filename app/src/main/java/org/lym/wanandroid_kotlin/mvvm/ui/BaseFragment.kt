@@ -9,10 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog
 import org.lym.wanandroid_kotlin.common.LOAD_ERROR
 import org.lym.wanandroid_kotlin.common.LOAD_FINISH
 import org.lym.wanandroid_kotlin.common.LOAD_STAR
-import org.lym.wanandroid_kotlin.mvvm.ui.dialog.TipDialog
 import org.lym.wanandroid_kotlin.mvvm.viewmodel.AutoDisposeViewModel
 import org.lym.wanandroid_kotlin.utils.scrollTop
 import org.lym.wanandroid_kotlin.utils.view
@@ -22,7 +22,6 @@ import org.lym.wanandroid_kotlin.weight.LoadMore
  * fragment基类
  *
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2020-01-02-15:24
  */
 abstract class BaseFragment : Fragment() {
@@ -111,12 +110,13 @@ abstract class BaseFragment : Fragment() {
         }
     }
 
-    private var tipLoading: TipDialog? = null
+    private var tipLoading: QMUITipDialog? = null
 
-    private fun getTipDialog(): TipDialog? {
+    private fun getTipDialog(): QMUITipDialog? {
         if (tipLoading == null) {
             tipLoading =
-                TipDialog.Builder(requireContext()).setIconType(TipDialog.Builder.ICON_TYPE_LOADING)
+                QMUITipDialog.Builder(requireContext())
+                    .setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING)
                     .create(true);
         }
         return tipLoading

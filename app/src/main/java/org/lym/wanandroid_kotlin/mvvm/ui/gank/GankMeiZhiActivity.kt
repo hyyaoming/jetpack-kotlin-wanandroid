@@ -23,7 +23,6 @@ import org.lym.wanandroid_kotlin.weight.preview.transfer.Transferee
  * Gank.io妹纸
  *
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2020-02-18-17:34
  */
 class GankMeiZhiActivity : BaseActivity() {

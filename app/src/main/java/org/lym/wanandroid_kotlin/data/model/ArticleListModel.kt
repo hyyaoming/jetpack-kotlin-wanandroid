@@ -6,7 +6,6 @@ import com.chad.library.adapter.base.entity.MultiItemEntity
  * 首页文章列表model
  *
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2020-01-02-15:05
  */
 data class ArticleListModel(

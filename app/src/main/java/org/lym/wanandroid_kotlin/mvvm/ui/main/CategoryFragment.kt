@@ -7,7 +7,6 @@ import org.lym.wanandroid_kotlin.mvvm.viewmodel.AutoDisposeViewModel
 
 /**
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2020-01-02-13:03
  */
 class CategoryFragment : BaseFragment() {

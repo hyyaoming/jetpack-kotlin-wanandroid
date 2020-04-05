@@ -8,7 +8,6 @@ import org.lym.wanandroid_kotlin.data.db.model.KeyWord
  * 搜索历史数据库操作
  *
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2020-01-04-11:38
  */
 @Dao

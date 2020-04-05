@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.qmuiteam.qmui.widget.QMUIFloatLayout
 import kotlinx.android.synthetic.main.fragment_search_history.*
 import org.lym.wanandroid_kotlin.R
 import org.lym.wanandroid_kotlin.data.db.AppDataBase
@@ -28,14 +29,12 @@ import org.lym.wanandroid_kotlin.mvvm.viewmodel.SearchResultViewModel
 import org.lym.wanandroid_kotlin.utils.dip2px
 import org.lym.wanandroid_kotlin.utils.hide
 import org.lym.wanandroid_kotlin.utils.toast
-import org.lym.wanandroid_kotlin.weight.FloatLayout
 import per.goweii.actionbarex.common.ActionBarSearch
 
 /**
  * 搜索历史fragment
  *
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2020-01-04-17:11
  */
 class HistoryFragment : BaseFragment() {
@@ -68,7 +67,7 @@ class HistoryFragment : BaseFragment() {
     }
 
     private fun bindHistory(list: List<KeyWord>) {
-        val historyFl = headView.findViewById<FloatLayout>(R.id.fl_history)
+        val historyFl = headView.findViewById<QMUIFloatLayout>(R.id.fl_history)
         val historyIcon = headView.findViewById<TextView>(R.id.tv_history_search)
         val clearHistory = headView.findViewById<ImageView>(R.id.iv_clear_history)
 
@@ -98,7 +97,7 @@ class HistoryFragment : BaseFragment() {
     }
 
     private fun hideHistoryView(
-        historyFl: FloatLayout,
+        historyFl: QMUIFloatLayout,
         historyIcon: TextView,
         clearHistory: ImageView
     ) {
@@ -110,7 +109,7 @@ class HistoryFragment : BaseFragment() {
     private fun addHeadView(list: List<HotWordModel>) {
         headView = LayoutInflater.from(requireActivity())
             .inflate(R.layout.head_hot_and_history_word_layout, rv_history, false)
-        val hotFl = headView.findViewById<FloatLayout>(R.id.fl_hot_word)
+        val hotFl = headView.findViewById<QMUIFloatLayout>(R.id.fl_hot_word)
 
         hotFl.removeAllViews()
         list.forEach { word ->

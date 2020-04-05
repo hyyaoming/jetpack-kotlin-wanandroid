@@ -11,7 +11,6 @@ import org.lym.wanandroid_kotlin.data.model.MultipleBannerModel
  * 首页Item Differ
  *
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2020-02-18-10:59
  */
 class IndexDiffer : DiffUtil.ItemCallback<MultiItemEntity>() {

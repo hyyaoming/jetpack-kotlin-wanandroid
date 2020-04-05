@@ -20,7 +20,6 @@ import org.lym.wanandroid_kotlin.app.WanApp
  * Glide辅助类
  *
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2020-01-02-17:55
  */
 class GlideHelper private constructor(context: Context) {

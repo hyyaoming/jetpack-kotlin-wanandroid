@@ -20,7 +20,7 @@ import org.lym.wanandroid_kotlin.R
 import kotlin.math.abs
 import kotlin.math.roundToInt
 
-open class PhotoView(context: Context?) : AppCompatImageView(context) {
+open class PhotoView(context: Context) : AppCompatImageView(context) {
     private var mMinRotate = 0
     /**
      * 获取动画持续时间

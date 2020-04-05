@@ -14,7 +14,6 @@ import org.lym.wanandroid_kotlin.data.model.ArticleModel
  * 搜索历史adapter
  *
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2020-01-04-19:24
  */
 class SearchHistoryAdapter :

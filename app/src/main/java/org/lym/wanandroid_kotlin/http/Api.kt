@@ -9,7 +9,6 @@ import retrofit2.http.*
  * 所有接口定义类
  *
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2019-12-31-13:38
  */
 interface Api {

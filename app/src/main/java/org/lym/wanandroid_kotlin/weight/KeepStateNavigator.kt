@@ -12,7 +12,6 @@ import androidx.navigation.fragment.FragmentNavigator
  * 保存fragment状态
  *
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2020-01-03-20:16
  */
 @Navigator.Name("keep_state_fragment") // `keep_state_fragment` is used in navigation xml

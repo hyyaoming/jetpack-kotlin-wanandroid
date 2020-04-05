@@ -14,7 +14,6 @@ import org.lym.wanandroid_kotlin.common.WEB_URL
  * Web页面展示
  *
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2020/4/3-5:44 PM
  */
 class WebActivity : BaseActivity() {

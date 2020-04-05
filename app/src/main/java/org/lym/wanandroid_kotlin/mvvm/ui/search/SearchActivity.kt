@@ -8,7 +8,6 @@ import org.lym.wanandroid_kotlin.R
  * 搜索页面
  *
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2020-01-04-16:58
  */
 class SearchActivity : AppCompatActivity() {

@@ -4,7 +4,6 @@ package org.lym.wanandroid_kotlin.data.model
  * 热词
  *
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2020-01-04-11:14
  */
 data class HotWordModel(

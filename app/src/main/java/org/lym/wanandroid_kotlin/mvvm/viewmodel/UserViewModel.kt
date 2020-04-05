@@ -10,7 +10,6 @@ import org.lym.wanandroid_kotlin.utils.toast
  * 用户中心ViewModel
  *
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2020-01-03-14:03
  */
 class UserViewModel(private val repository: UserRepository) : AutoDisposeViewModel() {

@@ -60,7 +60,8 @@ dependencies {
     implementation rootProject.ext.dependencies.progresspieview
     implementation rootProject.ext.dependencies.gif_drawable
     implementation rootProject.ext.dependencies.util
-
+    implementation rootProject.ext.dependencies.qmui
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.3.61"
 
 
 }

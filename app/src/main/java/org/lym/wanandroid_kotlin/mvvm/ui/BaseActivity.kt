@@ -7,10 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog
 import org.lym.wanandroid_kotlin.common.LOAD_ERROR
 import org.lym.wanandroid_kotlin.common.LOAD_FINISH
 import org.lym.wanandroid_kotlin.common.LOAD_STAR
-import org.lym.wanandroid_kotlin.mvvm.ui.dialog.TipDialog
 import org.lym.wanandroid_kotlin.mvvm.viewmodel.AutoDisposeViewModel
 import org.lym.wanandroid_kotlin.utils.scrollTop
 import org.lym.wanandroid_kotlin.weight.LoadMore
@@ -19,7 +19,6 @@ import org.lym.wanandroid_kotlin.weight.LoadMore
  * activity 简单基类
  *
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2020-02-18-17:57
  */
 abstract class BaseActivity : AppCompatActivity() {
@@ -100,12 +99,12 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
-    private var tipLoading: TipDialog? = null
+    private var tipLoading: QMUITipDialog? = null
 
-    private fun getTipDialog(): TipDialog? {
+    private fun getTipDialog(): QMUITipDialog? {
         if (tipLoading == null) {
             tipLoading =
-                TipDialog.Builder(this).setIconType(TipDialog.Builder.ICON_TYPE_LOADING)
+                QMUITipDialog.Builder(this).setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING)
                     .create(true);
         }
         return tipLoading

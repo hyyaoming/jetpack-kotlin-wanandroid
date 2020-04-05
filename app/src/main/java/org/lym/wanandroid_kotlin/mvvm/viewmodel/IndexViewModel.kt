@@ -16,7 +16,6 @@ import org.lym.wanandroid_kotlin.utils.toast
  * 首页ViewModel
  *
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2019-12-31-19:13
  */
 class IndexViewModel(var indexRepository: IndexRepository) : AutoDisposeViewModel() {

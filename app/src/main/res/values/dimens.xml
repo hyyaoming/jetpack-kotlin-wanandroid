@@ -2,6 +2,7 @@
 <resources>
     <dimen name="banner_height">165dp</dimen>
     <dimen name="dp_16">16dp</dimen>
+    <dimen name="dp_18">18dp</dimen>
     <dimen name="dp_15">15dp</dimen>
     <dimen name="dp_12">12dp</dimen>
     <dimen name="dp_13">13dp</dimen>

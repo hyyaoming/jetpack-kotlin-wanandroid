@@ -12,7 +12,6 @@ import javax.net.ssl.SSLException
 
 /**
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2019-12-31-15:44
  */
 class ExceptionHandle {

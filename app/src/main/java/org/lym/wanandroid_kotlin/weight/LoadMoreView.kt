@@ -9,7 +9,6 @@ import org.lym.wanandroid_kotlin.R
 
 /**
  * author: liyaoming
- * email: liyaoming@bixin.cn
  * date: 2020-01-03-20:46
  */
 class LoadMoreView : BaseLoadMoreView() {

@@ -12,30 +12,25 @@ import java.util.*
  * 数字索引指示器
  */
 class NumberIndicator @JvmOverloads constructor(
-    context: Context?,
+    context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : AppCompatTextView(context, attrs, defStyleAttr) {
-    private var mViewPager: ViewPager? = null
-    private val mInternalPageChangeListener: OnPageChangeListener = object : OnPageChangeListener {
-        override fun onPageScrolled(
-            position: Int,
-            positionOffset: Float,
-            positionOffsetPixels: Int
-        ) {
-        }
-
+    private lateinit var viewPager: ViewPager
+    private val mInternalPageChangeListener: OnPageChangeListener = object :
+        ViewPager.SimpleOnPageChangeListener() {
         override fun onPageSelected(position: Int) {
-            if (mViewPager!!.adapter == null || mViewPager!!.adapter!!.count <= 0) return
+            if (!this@NumberIndicator::viewPager.isInitialized) {
+                return
+            }
+            if (viewPager.adapter == null || viewPager.adapter!!.count <= 0) return
             text = String.format(
                 Locale.getDefault(),
                 STR_NUM_FORMAT,
                 position + 1,
-                mViewPager!!.adapter!!.count
+                viewPager.adapter!!.count
             )
         }
-
-        override fun onPageScrollStateChanged(state: Int) {}
     }
 
     private fun initNumberIndicator() {
@@ -43,12 +38,12 @@ class NumberIndicator @JvmOverloads constructor(
         textSize = 18f
     }
 
-    fun setViewPager(viewPager: ViewPager?) {
-        if (viewPager != null && viewPager.adapter != null) {
-            mViewPager = viewPager
-            mViewPager!!.removeOnPageChangeListener(mInternalPageChangeListener)
-            mViewPager!!.addOnPageChangeListener(mInternalPageChangeListener)
-            mInternalPageChangeListener.onPageSelected(mViewPager!!.currentItem)
+    fun setViewPager(viewPager: ViewPager) {
+        viewPager.adapter?.let {
+            this.viewPager = viewPager
+            viewPager.removeOnPageChangeListener(mInternalPageChangeListener)
+            viewPager.addOnPageChangeListener(mInternalPageChangeListener)
+            mInternalPageChangeListener.onPageSelected(viewPager.currentItem)
         }
     }
 
