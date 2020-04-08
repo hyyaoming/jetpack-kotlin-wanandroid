@@ -94,7 +94,7 @@ interface Api {
      * @param page  页码
      * @return  返回Observable观察流
      */
-    @GET("api/data/福利/10/{page}")
+    @GET("api/v2/data/category/Girl/type/Girl/page/{page}/count/10")
     fun getGankMeiZhi(@Path("page") page: Int): Observable<GankMeiZhi>
 
 }

@@ -50,6 +50,9 @@ class GankMeiZhiActivity : BaseActivity() {
         rv_gank.setHasFixedSize(true)
         rv_gank.adapter = gankAdapter
         initPreviewConfig()
+        title_bar.setOnLeftIconClickListener {
+            finish()
+        }
     }
 
     override fun getLayoutId() = R.layout.activity_gank_meizhi

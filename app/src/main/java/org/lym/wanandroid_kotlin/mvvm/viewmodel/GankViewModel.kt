@@ -2,6 +2,7 @@ package org.lym.wanandroid_kotlin.mvvm.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import org.lym.wanandroid_kotlin.data.RequestObserver
+import org.lym.wanandroid_kotlin.data.model.GankMeiZhi
 import org.lym.wanandroid_kotlin.data.model.MeiZhi
 import org.lym.wanandroid_kotlin.data.repository.GankRepository
 import org.lym.wanandroid_kotlin.utils.toast
@@ -15,30 +16,25 @@ import org.lym.wanandroid_kotlin.utils.toast
 class GankViewModel(val repository: GankRepository) : AutoDisposeViewModel() {
     var meiZhi = MutableLiveData<MutableList<MeiZhi>>()
     var moreMeiZhi = MutableLiveData<MutableList<MeiZhi>>()
-    private var page = 3;
+    private var page = 1;
 
     init {
         loadGankMeiZhi(true)
     }
 
     fun loadGankMeiZhi(first: Boolean) {
-        if (first) {
-            page == 3
-        } else {
-            if (page++ == 6) {
-                loadEnd.value = true
-                return
-            }
-        }
-        repository.getMeiZhi(page,
-            object : RequestObserver<MutableList<MeiZhi>>() {
-                override fun onSuccess(data: MutableList<MeiZhi>?) {
+        repository.getMeiZhi(page++,
+            object : RequestObserver<GankMeiZhi>() {
+                override fun onSuccess(data: GankMeiZhi?) {
                     super.onSuccess(data)
                     if (first) {
-                        meiZhi.value = data
+                        meiZhi.value = data?.data
                     } else {
-                        moreMeiZhi.value = data
+                        moreMeiZhi.value = data?.data
                         loadMoreComplete.value = true
+                    }
+                    if (page - 1 == data?.page_count) {
+                        loadEnd.value = true
                     }
                 }
 

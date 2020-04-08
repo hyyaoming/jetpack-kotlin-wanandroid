@@ -7,8 +7,11 @@ package org.lym.wanandroid_kotlin.data.model
  * date: 2020-02-18-12:06
  */
 data class GankMeiZhi(
-    var results: MutableList<MeiZhi>? = null,
-    var error: Boolean? = null
+    var data: MutableList<MeiZhi>? = null,
+    var error: Boolean? = null,
+    var status: Int,
+    var page_count: Int,
+    var total_counts: Int
 )
 
 data class MeiZhi(
